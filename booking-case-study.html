@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking &amp; Accounting System — Kelly Heng</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500&family=Geist:wght@300;400;500;600&family=Instrument+Serif&family=Roboto+Mono:wght@600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── ROOT / VARIABLES ───────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f6f7f2;
+      --text:      #1A1A1A;
+      --soft:      #3C3C3A;
+      --muted:     #9B9690;
+      --divider:   #E3E0D8;
+      --page-pad:  64px;
+      --text-max:  680px;
+      --case:      #EF4444;
+    }
+
+    /* ── BASE / RESET ───────────────────────── */
+    html {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Geist', -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    body { min-height: 100vh; opacity: 0; transition: opacity 0.3s ease; }
+    a    { color: inherit; text-decoration: none; }
+
+    /* ── OUTER WRAPPER ──────────────────────── */
+    .cs-outer {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 48px var(--page-pad) 96px;
+    }
+
+    /* ── BACK LINK ──────────────────────────── */
+
+
+    /* ── TITLE ──────────────────────────────── */
+    .cs-title {
+      font-family: 'Geist', -apple-system, sans-serif;
+      font-size: 41px; font-weight: 400; letter-spacing: -0.03em;
+      line-height: 1.1; padding-top: 14px; padding-bottom: 14px; margin-bottom: 28px;
+    }
+
+    /* ── HERO ───────────────────────────────── */
+    .cs-hero {
+      width: 100%;
+      aspect-ratio: 2.2 / 1;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+    .cs-hero img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+    /* ── INTRO ROW ──────────────────────────── */
+    .cs-intro-row {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 24px;
+      padding-bottom: 60px;
+      border-bottom: 1px dashed var(--divider);
+      margin-bottom: 72px;
+    }
+    .cs-intro-body { max-width: 680px; }
+    .cs-intro-body .section-label { margin-bottom: 14px; }
+    .cs-intro-lead {
+      font-size: 22px; font-weight: 500; line-height: 1.45;
+      letter-spacing: -0.015em;
+      color: var(--text); margin-bottom: 14px;
+    }
+    .cs-meta-col {
+      display: flex; flex-direction: column; gap: 24px;
+      padding-top: 2px;
+    }
+    .cs-meta-item { display: flex; flex-direction: column; gap: 5px; }
+    .cs-meta-label {
+      font-size: 16px; font-family: 'DM Mono', monospace; font-weight: 500;
+      letter-spacing: 0.01em; text-transform: uppercase; color: #F24822;
+    }
+    .cs-meta-value { font-size: 15px; line-height: 1.5; }
+
+    /* ── BODY CONTENT ───────────────────────── */
+    .cs-section { margin-bottom: 72px; }
+
+    .section-label {
+      display: block; font-size: 16px; font-family: 'DM Mono', monospace; font-weight: 500;
+      letter-spacing: 0.01em; text-transform: uppercase; color: #F24822; margin-bottom: 16px;
+    }
+
+    .cs-h2 {
+      font-family: 'Geist', -apple-system, sans-serif;
+      font-size: 32px; font-weight: 400; letter-spacing: -0.03em;
+      line-height: 1.15; margin-bottom: 12px; max-width: var(--text-max);
+    }
+
+    .cs-body { font-size: 15px; line-height: 1.5; color: var(--soft); max-width: var(--text-max); }
+    .cs-body + .cs-body { margin-top: 12px; }
+
+    .cs-sublist { margin-top: 8px; padding-left: 0; list-style: none; max-width: var(--text-max); }
+    .cs-sublist li { font-size: 15px; color: var(--soft); line-height: 1.5; padding-left: 22px; margin-bottom: 6px; position: relative; }
+    .cs-sublist li::before { content: '→'; position: absolute; left: 0; color: var(--muted); }
+
+    .cs-numbered { padding-left: 22px; margin-top: 16px; max-width: var(--text-max); }
+    .cs-numbered li { font-size: 15px; color: var(--soft); line-height: 1.72; margin-bottom: 16px; }
+
+    /* ── SOLUTIONS ──────────────────────────── */
+    .solution-item { margin-bottom: 56px; }
+    .solution-item:last-child { margin-bottom: 0; }
+    .cs-rule { border: none; border-top: 1px dashed var(--divider); margin: 0 0 72px; }
+
+    /* ── MOCKUPS ────────────────────────────── */
+    .cs-mockup { position: relative; width: 100%; border-radius: 12px; overflow: hidden; margin-top: 24px; }
+    .cs-mockup img { display: block; width: 100%; height: auto; }
+    .cs-img-pair > div { position: relative; overflow: hidden; border-radius: 8px; }
+    .cs-caption {
+      position: absolute; bottom: 12px; left: 12px;
+      padding: 6px 14px;
+      background: #ffffff; border-radius: 100px;
+      font-size: 12px; color: var(--text);
+      opacity: 0; transform: translateY(4px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      white-space: nowrap;
+    }
+    .cs-mockup:hover .cs-caption,
+    .cs-img-pair > div:hover .cs-caption { opacity: 1; transform: translateY(0); }
+
+    /* ── IMAGE PAIR ─────────────────────────── */
+    .cs-img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+
+    /* ── THEME CARDS ───────────────────────── */
+    .cs-theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+    .cs-theme-card { border-radius: 12px; padding: 22px 24px; background: #ffffff; border: 0.5px solid #e3e3e3; }
+    .cs-theme-card-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+    .cs-theme-card .cs-sublist { margin-top: 0; }
+
+    /* ── IMPACT PILLS ──────────────────────── */
+    .cs-impact { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+    .cs-impact-pill {
+      display: inline-block; align-self: flex-start;
+      padding: 8px 18px;
+      background: #F3F4F6; border-radius: 100px;
+      font-size: 13.5px; color: var(--soft); line-height: 1.4;
+    }
+    .cs-impact-pill--wrapped { border-radius: 12px; }
+
+    /* ── NOTE CALLOUT ───────────────────────── */
+    .cs-note { background: #ffffff; border: 0.5px solid #e3e3e3; border-radius: 12px; padding: 22px 24px; margin-top: 24px; max-width: var(--text-max); }
+    .cs-note p { font-size: 13.5px; line-height: 1.72; color: var(--soft); }
+    .cs-note p + p { margin-top: 10px; }
+
+    /* ── SCROLL ANIMATIONS ──────────────────────── */
+    .cs-scroll {
+      opacity: 0;
+      transform: translateY(7px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .cs-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ─────────────────────────── */
+    @media (max-width: 640px)  { :root { --page-pad: 20px; } }
+
+    @media (max-width: 960px) {
+      .cs-intro-row { grid-template-columns: 1fr; gap: 36px; }
+      .cs-meta-col { flex-direction: row; flex-wrap: wrap; gap: 24px 40px; }
+    }
+    @media (max-width: 700px) {
+      .cs-title        { font-size: 32px; }
+      .cs-h2           { font-size: 28px; }
+      .cs-intro-lead   { font-size: 18px; }
+      .cs-img-pair     { grid-template-columns: 1fr; }
+      .cs-theme-grid   { grid-template-columns: 1fr; }
+
+    }
+
+    /* ── BACK TO TOP ────────────────────────── */
+    .btt-btn {
+      position: fixed; bottom: 32px; right: 32px;
+      width: 66px; height: 66px; border-radius: 50%;
+      background: #fff; border: 1px solid var(--divider);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; opacity: 0; transform: translateY(8px);
+      transition: opacity 0.25s ease, transform 0.25s ease, background 0.15s ease, bottom 0.15s ease;
+      z-index: 100;
+    }
+    .btt-btn.visible { opacity: 1; transform: translateY(0); }
+    .btt-btn:hover { background: #F5F4F1; }
+
+    /* ── PORTFOLIO HEADER / FOOTER ─── */
+    .pf-header { background: #f6f7f2; padding-top: 32px; }
+    .pf-header-inner {
+      margin-left: 64px; margin-right: 64px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding-bottom: 32px;
+      border-bottom: 1px dashed #d0d0c8;
+    }
+    .pf-site-name {
+      font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 400;
+      letter-spacing: 0.01em; text-transform: uppercase; color: #777777;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+    }
+    .pf-header-right { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .pf-resume-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 400;
+      letter-spacing: 0.01em; text-transform: uppercase;
+      background: #e8e8e4; border-radius: 9999px; padding: 2px 6px;
+      color: #777777; text-decoration: none;
+      transition: background 0.18s ease;
+    }
+    .pf-resume-btn:hover { background: #deded9; }
+    .pf-email-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 400;
+      letter-spacing: 0.01em; text-transform: uppercase;
+      color: #777777; text-decoration: none; transition: transform 0.18s ease;
+    }
+    .pf-email-link:hover { transform: translateX(4px); }
+    .pf-footer { background: #f6f7f2; padding-bottom: 32px; }
+    .pf-footer-inner {
+      margin-left: 64px; margin-right: 64px;
+      border-top: 1px dashed #d0d0c8; padding-top: 32px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .pf-social-links { display: flex; align-items: center; gap: 8px; }
+    .pf-icon-link {
+      display: inline-flex; align-items: center; justify-content: center;
+      color: #777777; text-decoration: none; transition: color 0.18s ease;
+    }
+    .pf-icon-link:hover { color: #1a1a1a; }
+    .pf-all-work {
+      font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 400;
+      letter-spacing: 0.01em; text-transform: uppercase;
+      color: #777777; text-decoration: none; transition: color 0.18s ease;
+    }
+    .pf-all-work:hover { color: #1a1a1a; }
+    @media (max-width: 640px) {
+      .pf-header-inner, .pf-footer-inner { margin-left: 20px; margin-right: 20px; }
+    }
+
+    /* ── CUSTOM CURSOR ──────────────────────── */
+    ::selection { background: rgba(255, 218, 71, 0.3); color: inherit; }
+    * { cursor: none !important; }
+    #cursor {
+      position: fixed;
+      top: 0; left: 0;
+      width: 20px; height: 20px;
+      background: #FFDA47;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      opacity: 0.8;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border 0.2s ease, opacity 0.2s ease;
+    }
+    #cursor.cursor--hover {
+      width: 30px; height: 30px;
+      background: rgba(255, 218, 71, 0.5);
+      border: 1px solid #FFDA47;
+      opacity: 1;
+    }
+  
+    /* ── CASE NAVIGATION ───────────────────── */
+    .pf-case-nav { padding: 0 64px 48px; }
+    .pf-case-nav-inner { border-top: 1px dashed #d0d0c8; padding-top: 48px; }
+    .pf-case-nav-inner {
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 32px;
+    }
+    .pf-case-nav-link {
+      display: flex; flex-direction: column; gap: 6px;
+      text-decoration: none; color: inherit; max-width: 44%;
+      transition: opacity 0.2s ease;
+    }
+    .pf-case-nav-link:hover { opacity: 0.5; }
+    .pf-case-nav-link--next { text-align: right; margin-left: auto; }
+    .pf-case-nav-dir {
+      font-family: 'DM Mono', monospace; font-size: 12px;
+      letter-spacing: 0.05em; text-transform: uppercase; color: #9B9690;
+    }
+    .pf-case-nav-title {
+      font-size: 18px; font-weight: 400;
+      letter-spacing: -0.02em; line-height: 1.2; color: #1A1A1A;
+    }
+    .pf-case-nav-type {
+      font-family: 'DM Mono', monospace; font-size: 11px;
+      letter-spacing: 0.06em; text-transform: uppercase; color: #9B9690;
+    }
+    @media (max-width: 640px) {
+      .pf-case-nav { padding: 0 20px 32px; }
+      .pf-case-nav-link { max-width: 48%; }
+      .pf-case-nav-title { font-size: 15px; }
+    }
+  
+    /* ── PAGE ENTER ANIMATIONS ──────────────── */
+    @keyframes pf-home-in {
+      from { opacity: 0; transform: translateX(-10px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes pf-right-in {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes pf-content-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .pf-site-name    { animation: pf-home-in    0.38s ease-out 0.06s both; }
+    .pf-email-link    { animation: pf-right-in   0.32s ease-out 0.12s both; }
+    .cs-outer        { animation: pf-content-in 0.50s ease-out 0.08s both; }
+  </style>
+</head>
+<body>
+
+  <header class="pf-header">
+    <div class="pf-header-inner">
+      <a href="index.html" class="pf-site-name">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12 6.5H1.5M6 3.5L1.5 6.5 6 9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        HOME
+      </a>
+      <div class="pf-header-right">
+        <a href="mailto:kellyhengjl@gmail.com" class="pf-email-link" aria-label="Email Kelly Heng">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="0.75" y="2.25" width="11.5" height="8.5" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M0.75 4L6.5 7.5 12.25 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          KELLYHENGJL@GMAIL.COM
+        </a>
+        <a href="images/resume.pdf" class="pf-resume-btn" download aria-label="Download resume">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M6.5 1v7.5M3.5 6.5l3 2.5 3-2.5M1.5 11.5h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          RESUME
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main>
+    <div class="cs-outer">
+
+
+      <!-- Hero -->
+      <div class="cs-hero">
+        <img src="images/booking-hero.jpg" alt="Booking and Accounting System" />
+      </div>
+
+      <h1 class="cs-title">Booking and Accounting System</h1>
+
+      <!-- Intro row -->
+      <div class="cs-intro-row">
+        <div class="cs-intro-body">
+          <span class="section-label">Context</span>
+          <p class="cs-intro-lead">The car leasing workflow operated across two separate systems, creating friction and delays that both teams had to work around daily.</p>
+          <p class="cs-body">A booking system used by salesmen and an accounting system used by accountants — each role depended on the other to complete a single booking lifecycle. Constant back-and-forth communication was required, and any delay or miscommunication resulted in inefficiencies.</p>
+        </div>
+        <div class="cs-meta-col">
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">My Role</span>
+            <span class="cs-meta-value">UIUX Designer, PM, QA</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Team</span>
+            <span class="cs-meta-value">1 Full-stack Dev</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Timeline</span>
+            <span class="cs-meta-value">2024 – 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Research -->
+      <div class="cs-section">
+        <span class="section-label">Research</span>
+        <div class="cs-mockup">
+          <img src="images/booking-research.jpg" alt="Workflow research" />
+        </div>
+      </div>
+
+      <hr class="cs-rule">
+
+      <!-- Solutions -->
+      <div class="cs-section">
+        <span class="section-label">Solution Highlight</span>
+
+        <!-- 1 -->
+        <div class="solution-item">
+          <h2 class="cs-h2">Unified system</h2>
+          <p class="cs-body">A unified booking system with integrated accounting workflows was introduced for both salesmen and accountants.</p>
+          <p class="cs-body">Instead of rebuilding the accounting system from scratch, the new system integrated with it via API:</p>
+          <ul class="cs-sublist">
+            <li>Actions performed on the booking system automatically generated the relevant financial documents in the accounting system</li>
+            <li>Invoices, receipts and data are pulled from the accounting system, which remains as the source of truth for financial data</li>
+          </ul>
+          <p class="cs-body" style="margin-top:12px">By displaying financial documents directly within the context of each booking lifecycle, both teams gained shared visibility into booking and payment statuses without relying on constant back-and-forth communication.</p>
+
+          <div class="cs-mockup">
+            <img src="images/booking-sol1.jpg" alt="Payments tab within the booking detail page" />
+            <p class="cs-caption">Payments tab displaying all financial documents related to the booking</p>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="solution-item">
+          <h2 class="cs-h2">Booking flow with enforced SOP and controlled flexibility</h2>
+          <p class="cs-body">For salesmen, I designed the interface to suit the booking workflow for clarity, complete with logs, and introduced structure through system-enforced workflows.</p>
+
+          <div class="cs-mockup">
+            <img src="images/booking-sol2a.jpg" alt="Booking workflow overview" />
+          </div>
+          <div class="cs-img-pair" style="margin-top:12px">
+            <div>
+              <img src="images/booking-sol2b.jpg" alt="Booking flow detail" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
+            </div>
+            <div>
+              <img src="images/booking-sol2c.jpg" alt="Booking flow detail" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
+            </div>
+          </div>
+
+          <p class="cs-body" style="margin-top:24px">At the same time, the system was designed around controlled flexibility:</p>
+          <ul class="cs-sublist">
+            <li>Salesmen were allowed to make changes to bookings before the rental agreement was printed and signed</li>
+            <li>Once the lease starts, only managers could make amendments</li>
+            <li>A log was added to track every change made to a booking, improving transparency across teams and making it easier to investigate bugs and disputes</li>
+          </ul>
+
+          <div class="cs-mockup">
+            <img src="images/booking-sol2d.jpg" alt="Booking change log" />
+          </div>
+
+          <div class="cs-impact">
+            <span class="cs-impact-pill">Operational inconsistencies dropped as common errors were prevented and reliance on memory and manual SOP adherence was reduced.</span>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="solution-item">
+          <h2 class="cs-h2">Payments dashboard for Accountants</h2>
+          <p class="cs-body">For accountants, I designed a payments dashboard providing a centralised overview of outstanding invoices, payment statuses, and their linked bookings and customers within a single interface.</p>
+          <p class="cs-body">This enabled faster payment verification, and streamlined operational tasks such as bulk generation of recurring monthly invoices.</p>
+
+          <div class="cs-mockup">
+            <img src="images/booking-sol3.jpg" alt="Payments dashboard" />
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="solution-item">
+          <h2 class="cs-h2">Further automation with Customer Portal</h2>
+          <p class="cs-body">After the booking system was fully migrated and stabilised, I designed a lightweight customer portal integrated into the marketing website.</p>
+          <p class="cs-body">The portal allowed customers to independently access their booking details, retrieve invoices and receipts, and make payments online.</p>
+
+          <div class="cs-mockup">
+            <img src="images/booking-sol4.jpg" alt="Customer portal" />
+          </div>
+
+          <div class="cs-impact">
+            <span class="cs-impact-pill">Reduced customers' reliance on salesmen for document requests and improved overall convenience through self-service access to essential booking and payment information.</span>
+          </div>
+        </div>
+
+      </div><!-- /solutions -->
+
+    </div>
+  </main>
+
+  <!-- CASE NAVIGATION -->
+  <nav class="pf-case-nav">
+    <div class="pf-case-nav-inner">
+      <a href="hrapp-case-study.html" class="pf-case-nav-link pf-case-nav-link--prev">
+      <span class="pf-case-nav-dir">← Previous</span>
+      <span class="pf-case-nav-title">Streamlining Leave, Attendance, and Workforce Availability</span>
+      <span class="pf-case-nav-type">MOBILE</span>
+    </a>
+      <a href="me3-case-study.html" class="pf-case-nav-link pf-case-nav-link--next">
+      <span class="pf-case-nav-dir">Next →</span>
+      <span class="pf-case-nav-title">Wallet UX for Mainstream Adoption</span>
+      <span class="pf-case-nav-type">MOBILE</span>
+    </a>
+    </div>
+  </nav>
+  <footer class="pf-footer">
+    <div class="pf-footer-inner">
+      <nav class="pf-social-links">
+        <a href="https://www.linkedin.com/in/kellyhengjl/" aria-label="LinkedIn" class="pf-icon-link" target="_blank" rel="noopener noreferrer">
+          <img src="images/icon-linkedin.png" alt="LinkedIn" width="22" height="22" onerror="this.style.opacity='0'">
+        </a>
+        <a href="https://www.instagram.com/blueuhour/" aria-label="Instagram" class="pf-icon-link" target="_blank" rel="noopener noreferrer">
+          <img src="images/icon-instagram.png" alt="Instagram" width="22" height="22" onerror="this.style.opacity='0'">
+        </a>
+      </nav>
+      <a href="https://behance.net/kellyheng" class="pf-resume-btn" target="_blank" rel="noopener noreferrer" aria-label="More work on Behance">
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        MORE WORK
+      </a>
+    </div>
+  </footer>
+
+  <button class="btt-btn" id="bttBtn" aria-label="Back to top">
+    <svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12V4M4 8l4-4 4 4"/></svg>
+  </button>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.body.style.transition = 'none';
+    document.body.style.opacity = '1';
+    var animObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          animObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.cs-intro-row, .cs-section').forEach(function(el) {
+      el.classList.add('cs-scroll');
+      animObserver.observe(el);
+    });
+    function checkPillWrap() {
+      document.querySelectorAll('.cs-impact-pill').forEach(function(pill) {
+        var singleLineHeight = parseFloat(getComputedStyle(pill).lineHeight) + 16;
+        pill.classList.toggle('cs-impact-pill--wrapped', pill.offsetHeight > singleLineHeight);
+      });
+    }
+    checkPillWrap();
+    window.addEventListener('resize', checkPillWrap);
+  });
+  document.querySelectorAll('a[href]').forEach(function (link) {
+    var href = link.getAttribute('href');
+    if (
+      href &&
+      !href.startsWith('#') &&
+      !href.startsWith('mailto:') &&
+      !href.startsWith('http') &&
+      link.target !== '_blank'
+    ) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.body.style.opacity = '0';
+        setTimeout(function () { window.location.href = href; }, 300);
+      });
+    }
+  });
+  var bttBtn = document.getElementById('bttBtn');
+  function updateBtt() {
+    bttBtn.classList.toggle('visible', window.scrollY > 300);
+    var sentinel = document.querySelector('.pf-case-nav') || document.querySelector('.pf-footer');
+    var sentinelRect = sentinel.getBoundingClientRect();
+    if (sentinelRect.top < window.innerHeight) {
+      bttBtn.style.bottom = (window.innerHeight - sentinelRect.top + 16) + 'px';
+    } else {
+      bttBtn.style.bottom = '';
+    }
+  }
+  window.addEventListener('scroll', updateBtt);
+  updateBtt();
+  bttBtn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  </script>
+
+  <script>
+  (function () {
+    var cur = document.createElement('div');
+    cur.id = 'cursor';
+    document.body.appendChild(cur);
+    document.addEventListener('mousemove', function (e) {
+      cur.style.left = e.clientX + 'px';
+      cur.style.top  = e.clientY + 'px';
+    });
+    var sel = 'a, button, [role="button"], input, select, textarea, label, [tabindex]';
+    document.addEventListener('mouseover', function (e) {
+      if (e.target.closest(sel)) cur.classList.add('cursor--hover');
+    });
+    document.addEventListener('mouseout', function (e) {
+      if (e.target.closest(sel)) cur.classList.remove('cursor--hover');
+    });
+    document.documentElement.addEventListener('mouseleave', function () { cur.style.opacity = '0'; });
+    document.documentElement.addEventListener('mouseenter', function () { cur.style.opacity = ''; });
+  })();
+  </script>
+
+</body>
+</html>

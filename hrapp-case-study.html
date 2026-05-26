@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workforce Case Study — Kelly Heng</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500&family=Geist:wght@300;400;500;600&family=Instrument+Serif&family=Roboto+Mono:wght@600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── ROOT / VARIABLES ───────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f6f7f2;
+      --text:      #1A1A1A;
+      --soft:      #3C3C3A;
+      --muted:     #9B9690;
+      --divider:   #E3E0D8;
+--page-pad:  64px;
+      --text-max:  680px;
+    }
+
+    /* ── BASE / RESET ───────────────────────── */
+    html {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Geist', -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    body { min-height: 100vh; opacity: 0; transition: opacity 0.3s ease; }
+    a    { color: inherit; text-decoration: none; }
+
+    /* ── OUTER WRAPPER ──────────────────────── */
+    .cs-outer {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 48px var(--page-pad) 96px;
+    }
+
+    /* ── BACK LINK ──────────────────────────── */
+
+
+    /* ── TITLE (above hero) ─────────────────── */
+    .cs-title {
+      font-family: 'Geist', -apple-system, sans-serif;
+      font-size: 41px; font-weight: 400; letter-spacing: -0.03em;
+      line-height: 1.1; padding-top: 14px; padding-bottom: 14px; margin-bottom: 28px;
+    }
+
+    /* ── HERO ───────────────────────────────── */
+    .cs-hero {
+      width: 100%;
+      aspect-ratio: 2.2 / 1;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+    .cs-hero img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .cs-hero svg { display: block; width: 100%; height: 100%; }
+
+    /* ── INTRO ROW (context + meta) ─────────── */
+    .cs-intro-row {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 24px;
+      padding-bottom: 60px;
+      border-bottom: 1px dashed var(--divider);
+      margin-bottom: 72px;
+    }
+    .cs-intro-body { max-width: 680px; }
+    .cs-intro-body .section-label { margin-bottom: 14px; }
+    .cs-intro-lead {
+      font-size: 22px; font-weight: 500; line-height: 1.45;
+      letter-spacing: -0.015em;
+      color: var(--text); margin-bottom: 14px;
+    }
+    .cs-meta-col {
+      display: flex; flex-direction: column; gap: 24px;
+      padding-top: 2px;
+    }
+    .cs-meta-item { display: flex; flex-direction: column; gap: 5px; }
+    .cs-meta-label {
+      font-size: 16px; font-family: 'DM Mono', monospace; font-weight: 500;
+      letter-spacing: 0.01em; text-transform: uppercase; color: #2B52DD;
+    }
+    .cs-meta-value { font-size: 15px; line-height: 1.5; }
+
+    /* ── BODY CONTENT ───────────────────────── */
+    .cs-section { margin-bottom: 72px; }
+
+    .section-label {
+      display: block; font-size: 16px; font-family: 'DM Mono', monospace; font-weight: 500;
+      letter-spacing: 0.01em; text-transform: uppercase; color: #2B52DD; margin-bottom: 16px;
+    }
+
+    .cs-h2 {
+      font-family: 'Geist', -apple-system, sans-serif;
+      font-size: 32px; font-weight: 400; letter-spacing: -0.03em;
+      line-height: 1.15; margin-bottom: 12px; max-width: var(--text-max);
+    }
+
+    .cs-body { font-size: 15px; line-height: 1.5; color: var(--soft); max-width: var(--text-max); }
+    .cs-body + .cs-body { margin-top: 12px; }
+
+    .cs-sublist { margin-top: 10px; padding-left: 0; list-style: none; max-width: var(--text-max); }
+    .cs-sublist li { font-size: 15px; color: var(--soft); line-height: 1.5; padding-left: 22px; margin-bottom: 6px; position: relative; }
+    .cs-sublist li::before { content: '→'; position: absolute; left: 0; color: var(--muted); }
+
+    .cs-numbered { padding-left: 22px; margin-top: 16px; max-width: var(--text-max); }
+    .cs-numbered li { font-size: 15px; color: var(--soft); line-height: 1.72; margin-bottom: 16px; }
+
+    .cs-result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 4px; }
+    .cs-result-item { background: #ffffff; border: 0.5px solid #e3e3e3; border-radius: 12px; padding: 22px 24px; }
+    .cs-result-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+
+
+    /* ── INSIGHTS LIST ──────────────────────── */
+    .cs-list { list-style: none; margin-top: 20px; max-width: var(--text-max); }
+    .cs-list li {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 14px 0; border-bottom: 1px solid var(--divider);
+      font-size: 14px; color: var(--soft); line-height: 1.62;
+    }
+    .cs-list li:first-child { border-top: 1px solid var(--divider); }
+    .cs-list li::before {
+      content: ''; flex-shrink: 0; width: 5px; height: 5px;
+      border-radius: 50%; background: var(--muted); margin-top: 8px;
+    }
+
+    /* ── SOLUTIONS ──────────────────────────── */
+    .solution-item { margin-bottom: 56px; }
+    .solution-item:last-child { margin-bottom: 0; }
+    .cs-rule { border: none; border-top: 1px dashed var(--divider); margin: 0 0 72px; }
+
+    /* ── MOCKUPS ────────────────────────────── */
+    .cs-mockup { position: relative; width: 100%; border-radius: 12px; overflow: hidden; margin-top: 24px; }
+    .cs-mockup svg { display: block; width: 100%; }
+    .cs-mockup img { display: block; width: 100%; height: auto; }
+    .cs-img-pair > div { position: relative; overflow: hidden; border-radius: 8px; }
+    .cs-caption {
+      position: absolute; bottom: 12px; left: 12px;
+      padding: 6px 14px;
+      background: #ffffff; border-radius: 100px;
+      font-size: 12px; color: var(--text);
+      opacity: 0; transform: translateY(4px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      white-space: nowrap;
+    }
+    .cs-mockup:hover .cs-caption,
+    .cs-img-pair > div:hover .cs-caption { opacity: 1; transform: translateY(0); }
+
+    /* ── IMAGE PAIR ─────────────────────────── */
+    .cs-img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+
+    /* ── THEMES ─────────────────────────────── */
+    /* ── THEME CARDS ────────────────────────── */
+    .cs-theme-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px;
+    }
+    .cs-theme-card { border-radius: 12px; padding: 22px 24px; background: #ffffff; border: 0.5px solid #e3e3e3; }
+    .cs-theme-card-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+    .cs-theme-card .cs-sublist { margin-top: 0; }
+
+    /* ── HMW / CALLOUTS ─────────────────────── */
+    .cs-hmw { margin-top: 24px; padding-top: 22px; }
+    .cs-hmw p { font-family: 'Geist', -apple-system, sans-serif; font-size: 32px; font-weight: 400; letter-spacing: -0.03em; color: var(--text); line-height: 1.15; max-width: none; }
+
+    /* Full-width card text overrides */
+    .cs-impact .cs-sublist,
+    .cs-impact .cs-body,
+    .cs-result-item .cs-body { max-width: none; }
+
+    .cs-blockquote { border-left: 3px solid var(--divider); padding: 12px 20px; margin: 16px 0; max-width: var(--text-max); }
+    .cs-blockquote p { font-size: 15px; color: var(--muted); line-height: 1.65; font-style: italic; }
+
+    .cs-impact { display: flex; flex-direction: column; gap: 8px; margin-top: 24px; }
+    .cs-impact-pill {
+      display: inline-block; align-self: flex-start;
+      padding: 8px 18px;
+      background: #F3F4F6; border-radius: 100px;
+      font-size: 13.5px; color: var(--soft); line-height: 1.4;
+    }
+    .cs-impact-pill--wrapped { border-radius: 12px; }
+
+
+    /* ── SCROLL ANIMATIONS ──────────────────────── */
+    .cs-scroll {
+      opacity: 0;
+      transform: translateY(7px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .cs-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ─────────────────────────── */
+    @media (max-width: 640px)  { :root { --page-pad: 20px; } }
+
+    @media (max-width: 960px) {
+      .cs-intro-row { grid-template-columns: 1fr; gap: 36px; }
+      .cs-meta-col { flex-direction: row; flex-wrap: wrap; gap: 24px 40px; }
+    }
+    @media (max-width: 700px) {
+      .cs-title        { font-size: 32px; }
+      .cs-h2           { font-size: 28px; }
+      .cs-intro-lead   { font-size: 18px; }
+      .cs-hmw p        { font-size: 28px; }
+      .cs-img-pair     { grid-template-columns: 1fr; }
+      .cs-theme-grid   { grid-template-columns: 1fr; }
+      .cs-result-grid  { grid-template-columns: 1fr; }
+
+    }
+
+    /* ── BACK TO TOP ────────────────────────── */
+    .btt-btn {
+      position: fixed; bottom: 32px; right: 32px;
+      width: 66px; height: 66px; border-radius: 50%;
+      background: #fff; border: 1px solid var(--divider);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; opacity: 0; transform: translateY(8px);
+      transition: opacity 0.25s ease, transform 0.25s ease, background 0.15s ease, bottom 0.15s ease;
+      z-index: 100;
+    }
+    .btt-btn.visible { opacity: 1; transform: translateY(0); }
+    .btt-btn:hover { background: #F5F4F1; }
+
+    /* ── PORTFOLIO HEADER / FOOTER ─── */
+    .pf-header { background: #f6f7f2; padding-top: 32px; }
+    .pf-header-inner {
+      margin-left: 64px; margin-right: 64px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding-bottom: 32px;
+      border-bottom: 1px dashed #d0d0c8;
+    }
+    .pf-site-name {
+      font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 400;
+      letter-spacing: 0.01em; text-transform: uppercase; color: #777777;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+    }
+    .pf-header-right { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .pf-resume-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 400;
+      letter-spacing: 0.01em; text-transform: uppercase;
+      background: #e8e8e4; border-radius: 9999px; padding: 2px 6px;
+      color: #777777; text-decoration: none;
+      transition: background 0.18s ease;
+    }
+    .pf-resume-btn:hover { background: #deded9; }
+    .pf-email-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 400;
+      letter-spacing: 0.01em; text-transform: uppercase;
+      color: #777777; text-decoration: none; transition: transform 0.18s ease;
+    }
+    .pf-email-link:hover { transform: translateX(4px); }
+    .pf-footer { background: #f6f7f2; padding-bottom: 32px; }
+    .pf-footer-inner {
+      margin-left: 64px; margin-right: 64px;
+      border-top: 1px dashed #d0d0c8; padding-top: 32px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .pf-social-links { display: flex; align-items: center; gap: 8px; }
+    .pf-icon-link {
+      display: inline-flex; align-items: center; justify-content: center;
+      color: #777777; text-decoration: none; transition: color 0.18s ease;
+    }
+    .pf-icon-link:hover { color: #1a1a1a; }
+    .pf-all-work {
+      font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 400;
+      letter-spacing: 0.01em; text-transform: uppercase;
+      color: #777777; text-decoration: none; transition: color 0.18s ease;
+    }
+    .pf-all-work:hover { color: #1a1a1a; }
+    @media (max-width: 640px) {
+      .pf-header-inner, .pf-footer-inner { margin-left: 20px; margin-right: 20px; }
+    }
+
+    /* ── CUSTOM CURSOR ──────────────────────── */
+    ::selection { background: rgba(255, 218, 71, 0.3); color: inherit; }
+    * { cursor: none !important; }
+    #cursor {
+      position: fixed;
+      top: 0; left: 0;
+      width: 20px; height: 20px;
+      background: #FFDA47;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      opacity: 0.8;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border 0.2s ease, opacity 0.2s ease;
+    }
+    #cursor.cursor--hover {
+      width: 30px; height: 30px;
+      background: rgba(255, 218, 71, 0.5);
+      border: 1px solid #FFDA47;
+      opacity: 1;
+    }
+  
+    /* ── CASE NAVIGATION ───────────────────── */
+    .pf-case-nav { padding: 0 64px 48px; }
+    .pf-case-nav-inner { border-top: 1px dashed #d0d0c8; padding-top: 48px; }
+    .pf-case-nav-inner {
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 32px;
+    }
+    .pf-case-nav-link {
+      display: flex; flex-direction: column; gap: 6px;
+      text-decoration: none; color: inherit; max-width: 44%;
+      transition: opacity 0.2s ease;
+    }
+    .pf-case-nav-link:hover { opacity: 0.5; }
+    .pf-case-nav-link--next { text-align: right; margin-left: auto; }
+    .pf-case-nav-dir {
+      font-family: 'DM Mono', monospace; font-size: 12px;
+      letter-spacing: 0.05em; text-transform: uppercase; color: #9B9690;
+    }
+    .pf-case-nav-title {
+      font-size: 18px; font-weight: 400;
+      letter-spacing: -0.02em; line-height: 1.2; color: #1A1A1A;
+    }
+    .pf-case-nav-type {
+      font-family: 'DM Mono', monospace; font-size: 11px;
+      letter-spacing: 0.06em; text-transform: uppercase; color: #9B9690;
+    }
+    @media (max-width: 640px) {
+      .pf-case-nav { padding: 0 20px 32px; }
+      .pf-case-nav-link { max-width: 48%; }
+      .pf-case-nav-title { font-size: 15px; }
+    }
+  
+    /* ── PAGE ENTER ANIMATIONS ──────────────── */
+    @keyframes pf-home-in {
+      from { opacity: 0; transform: translateX(-10px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes pf-right-in {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes pf-content-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .pf-site-name    { animation: pf-home-in    0.38s ease-out 0.06s both; }
+    .pf-email-link    { animation: pf-right-in   0.32s ease-out 0.12s both; }
+    .cs-outer        { animation: pf-content-in 0.50s ease-out 0.08s both; }
+  </style>
+</head>
+<body>
+
+  <header class="pf-header">
+    <div class="pf-header-inner">
+      <a href="index.html" class="pf-site-name">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12 6.5H1.5M6 3.5L1.5 6.5 6 9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        HOME
+      </a>
+      <div class="pf-header-right">
+        <a href="mailto:kellyhengjl@gmail.com" class="pf-email-link" aria-label="Email Kelly Heng">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="0.75" y="2.25" width="11.5" height="8.5" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M0.75 4L6.5 7.5 12.25 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          KELLYHENGJL@GMAIL.COM
+        </a>
+        <a href="images/resume.pdf" class="pf-resume-btn" download aria-label="Download resume">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M6.5 1v7.5M3.5 6.5l3 2.5 3-2.5M1.5 11.5h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          RESUME
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main>
+    <div class="cs-outer">
+
+
+      <!-- Hero -->
+      <div class="cs-hero">
+        <img src="images/wf-hero.jpg" alt="HR App" />
+      </div>
+
+      <h1 class="cs-title">Streamlining Leave, Attendance, and Workforce Visibility</h1>
+
+      <!-- Intro row: context (left) + meta (right) -->
+      <div class="cs-intro-row">
+        <div class="cs-intro-body">
+          <span class="section-label">Context</span>
+          <p class="cs-intro-lead">In a rapidly growing local company, HR processes relied on fragmented and manual workflows.</p>
+          <p class="cs-body">Employees applied for leave through WhatsApp, while managers and HR staff struggled to manage rosters, team capacity, and leave tracking without a centralised system.</p>
+          <p class="cs-body">As the company expanded and hired remote staff across China and the Philippines, these inefficiencies became harder to sustain, this was an opportunity to digitise and streamline HR operations.</p>
+        </div>
+        <div class="cs-meta-col">
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">My Role</span>
+            <span class="cs-meta-value">UIUX Designer, PM, QA</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Team</span>
+            <span class="cs-meta-value">1 Mobile Dev, 1 Backend Dev</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Timeline</span>
+            <span class="cs-meta-value">2023 – 2024</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Research -->
+      <div class="cs-section">
+        <span class="section-label">Research</span>
+        <p class="cs-body">I spoke with colleagues from 3 user groups to understand:</p>
+        <ul class="cs-sublist">
+          <li>what actions each user group took</li>
+          <li>where breakdowns occurred</li>
+          <li>what impact those breakdowns created</li>
+        </ul>
+
+        <div class="cs-mockup" style="margin-top:24px">
+          <img src="images/wf-research.jpg" alt="User journey map" />
+        </div>
+
+        <p class="cs-body" style="margin-top:24px">The issues could be converged into two themes:</p>
+
+        <div class="cs-theme-grid">
+          <div class="cs-theme-card">
+            <p class="cs-theme-card-title">Manual administrative overhead</p>
+            <p class="cs-body">HR spent 3 – 5 hours weekly tracking leave balances, verifying documents like MCs, had unnecessarily frequent back-and-forth communication with employees</p>
+          </div>
+          <div class="cs-theme-card">
+            <p class="cs-theme-card-title">Lack of visibility across teams</p>
+            <p class="cs-body">Employees had no clear view of their leave balance or colleagues' availability → last minute and/or overlapping leaves, managers struggling to anticipate staffing gaps.</p>
+          </div>
+        </div>
+
+        <div class="cs-hmw">
+          <p>How might we reduce manual workload and improve visibility of workforce availability across employees, managers, and HR?</p>
+        </div>
+      </div>
+
+      <hr class="cs-rule">
+
+      <!-- Ideating and Testing -->
+      <div class="cs-section">
+        <span class="section-label">Ideating and Testing</span>
+        <p class="cs-body">To address the challenges, we first introduced a solution structured around two interfaces:</p>
+        <ul class="cs-sublist">
+          <li><strong>Backend system (for HR staff &amp; managers)</strong> — Used to manage employee records, track leave balances and history, assign rosters, and monitor attendance.</li>
+          <li><strong>Mobile app (for employees)</strong> — Used to check leave balances, apply for leave, view team rosters, and clock in and out. This provided employees with direct access to information and actions.</li>
+        </ul>
+
+        <div class="cs-mockup" style="margin-top:24px">
+          <img src="images/wf-ideate-system.jpg" alt="System structure and roles" />
+          <p class="cs-caption">System structure and roles</p>
+        </div>
+
+        <div class="cs-img-pair">
+          <div>
+            <img src="images/wf-ideate-roster.jpg" alt="Roster setting for Managers" style="width:100%;height:auto;display:block;border-radius:8px;" />
+            <p class="cs-caption">Roster setting for Managers</p>
+          </div>
+          <div>
+            <img src="images/wf-ideate-leaves.jpg" alt="Employee's leave records and balances" style="width:100%;height:auto;display:block;border-radius:8px;" />
+            <p class="cs-caption">Employee's leave records and balances</p>
+          </div>
+        </div>
+
+        <div class="cs-mockup" style="margin-top:16px">
+          <img src="images/wf-ideate-sitemap.jpg" alt="App site map" />
+          <p class="cs-caption">App site map</p>
+        </div>
+
+        <div class="cs-mockup" style="margin-top:16px">
+          <img src="images/wf-ideate-app.jpg" alt="App for Employees" />
+          <p class="cs-caption">App for Employees: Home → Roster, Clock in / out, Leaves → Apply for Leave</p>
+        </div>
+
+        <p class="cs-body" style="margin-top:24px">This addressed more than half of the inefficiencies uncovered, however, through gathering feedback, we found opportunities to improve on the solution.</p>
+      </div>
+
+      <hr class="cs-rule">
+
+      <!-- Iteration -->
+      <div class="cs-section">
+        <span class="section-label">Iteration</span>
+
+        <!-- 1 -->
+        <div class="solution-item">
+
+          <h2 class="cs-h2">Improving team visibility</h2>
+          <p class="cs-body">As leave applications shifted from WhatsApp to the app, team-wide visibility of absences was lost, and employees often forgot to inform colleagues after applying for leave.</p>
+          <p class="cs-body">To restore visibility, I introduced:</p>
+          <ul class="cs-sublist">
+            <li><strong>home screen notifications</strong> highlighting how many team members are on leave each day</li>
+            <li><strong>a shared calendar</strong> showing colleagues' upcoming leaves and country-specific public holidays</li>
+          </ul>
+
+          <div class="cs-img-pair" style="margin-top:24px">
+            <div>
+              <img src="images/wf-sol1-home.jpg" alt="Home screen notifications" style="width:100%;height:auto;display:block;border-radius:8px;" />
+              <p class="cs-caption">Home screen notifications indicating if team members are on leave</p>
+            </div>
+            <div>
+              <img src="images/wf-sol1-calendar.jpg" alt="Leaves calendar for teams" style="width:100%;height:auto;display:block;border-radius:8px;" />
+              <p class="cs-caption">Leaves calendar for teams</p>
+            </div>
+          </div>
+
+          <div class="cs-impact">
+            <span class="cs-impact-pill">Recreated passive awareness without relying on manual communication.</span>
+            <span class="cs-impact-pill">Teams were much more aware of colleagues' future absences and better able to plan ahead.</span>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="solution-item">
+
+          <h2 class="cs-h2">Fully eliminating manual leave tracking</h2>
+          <p class="cs-body">While standard leave types like annual and medical leave were easily managed in the system, HR still had to manually track more complex leave types such as Off-in-Lieu (OIL) due to system limitations.</p>
+          <p class="cs-body">To reduce this overhead, we introduced an OIL leave type with:</p>
+          <ul class="cs-sublist">
+            <li>automated logic for leave assignment based on worked public holidays and roster data</li>
+            <li>built-in expiry rules since OIL is only valid for 3 months</li>
+          </ul>
+
+          <div class="cs-img-pair" style="margin-top:24px">
+            <div>
+              <img src="images/wf-sol2-oil1.jpg" alt="OIL leave type" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
+            </div>
+            <div>
+              <img src="images/wf-sol2-oil2.jpg" alt="OIL leave expiry" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
+            </div>
+          </div>
+
+          <div class="cs-impact">
+            <span class="cs-impact-pill">Employees can check when their own OIL expires.</span>
+            <span class="cs-impact-pill">HR staff no longer track and manually adjust per employee, saving up to 3 hours per month.</span>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="solution-item">
+
+          <h2 class="cs-h2">Preventing understaffing</h2>
+          <p class="cs-body">While the system enabled managers to manage rosters and keep teams informed, staffing gaps still occurred when too many employees took leave during the same period.</p>
+          <div class="cs-blockquote">
+            <p>We identified that leave management was unbounded, with no mechanism preventing staffing shortages before they happened.</p>
+          </div>
+          <p class="cs-body">Instead of introducing leave approvals which would increase managerial overhead and decision fatigue, we implemented a minimum headcount constraint, allowing managers to define the minimum staffing required each day.</p>
+          <ul class="cs-sublist">
+            <li>Once the threshold is reached, new leave applications are automatically blocked</li>
+            <li>MCs and other exceptions can still be manually overridden by managers</li>
+          </ul>
+
+          <div class="cs-mockup" style="margin-top:24px">
+            <img src="images/wf-sol3-headcount.jpg" alt="Minimum headcount constraint" />
+          </div>
+
+          <div class="cs-impact">
+            <span class="cs-impact-pill">Staffing gaps were mitigated and discussed in advance, shifting leave management from reactive to preventative control.</span>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="solution-item">
+
+          <h2 class="cs-h2">Improving attendance integrity</h2>
+          <p class="cs-body">The initial version of the app used GPS-based clock-ins, allowing employees to mark attendance once they were within the office vicinity.</p>
+          <p class="cs-body">However, it was observed that some employees clocked in before physically reaching their workstation.</p>
+          <p class="cs-body">To improve attendance integrity, we introduced NFC-based clock-ins by placing NFC cards in the office, requiring employees to tap their device on-site in order to clock in.</p>
+          <p class="cs-body">GPS clock-in was retained as a fallback for remote employees, with system flags differentiating on-site and remote workers.</p>
+
+          <div class="cs-mockup" style="margin-top:24px">
+            <img src="images/wf-sol4-nfc.jpg" alt="NFC Clock-ins" />
+            <p class="cs-caption">NFC Clock-ins</p>
+          </div>
+
+          <div class="cs-impact">
+            <span class="cs-impact-pill">Employees reached earlier to clock in and operational managers struggled less with late employees.</span>
+          </div>
+        </div>
+
+      </div><!-- /solutions -->
+
+      <!-- Results -->
+      <div class="cs-section">
+        <span class="section-label">Results</span>
+        <div class="cs-result-grid">
+          <div class="cs-result-item">
+            <p class="cs-result-title">Reduced HR administrative workload</p>
+            <p class="cs-body">Less than half the time spent per month (up to 20hrs to &lt;10hrs) was required for HR administrative work.</p>
+          </div>
+          <div class="cs-result-item">
+            <p class="cs-result-title">Improved employee autonomy</p>
+            <p class="cs-body">Employees no longer needed to contact HR to check leave balances</p>
+          </div>
+          <div class="cs-result-item">
+            <p class="cs-result-title">Better workforce visibility and reliable operations</p>
+            <p class="cs-body">Managers could better maintain staffing levels and avoid disruptions, teams gained awareness of colleagues' availability and upcoming absences</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reflection -->
+      <div class="cs-section">
+        <span class="section-label">Reflection</span>
+        <p class="cs-body">Lessons learnt:</p>
+        <ol class="cs-numbered">
+          <li><strong>Visibility should be ambient, not effort-driven</strong><br>Users shouldn't have to actively check multiple places to understand team availability.</li>
+          <li><strong>The system should prevent operational issues, not just record them</strong><br>Especially for staffing, the app should act as a constraint system, not just a tracking tool.</li>
+          <li><strong>Digitising a workflow is not enough</strong><br>The invisible systems of awareness that people rely on must also be preserved or redesigned</li>
+        </ol>
+        <p class="cs-body" style="margin-top:16px">By shifting from simply "building features" to designing for visibility and control, the app evolved into a system that not only reduced manual work, but actively supported operational decision-making.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- CASE NAVIGATION -->
+  <nav class="pf-case-nav">
+    <div class="pf-case-nav-inner">
+      <a href="car-rental-case-study.html" class="pf-case-nav-link pf-case-nav-link--prev">
+      <span class="pf-case-nav-dir">← Previous</span>
+      <span class="pf-case-nav-title">Designing a Mobile Car Rental Experience Users Trust</span>
+      <span class="pf-case-nav-type">MOBILE</span>
+    </a>
+      <a href="booking-case-study.html" class="pf-case-nav-link pf-case-nav-link--next">
+      <span class="pf-case-nav-dir">Next →</span>
+      <span class="pf-case-nav-title">Booking &amp; Accounting System</span>
+      <span class="pf-case-nav-type">DESKTOP</span>
+    </a>
+    </div>
+  </nav>
+  <footer class="pf-footer">
+    <div class="pf-footer-inner">
+      <nav class="pf-social-links">
+        <a href="https://www.linkedin.com/in/kellyhengjl/" aria-label="LinkedIn" class="pf-icon-link" target="_blank" rel="noopener noreferrer">
+          <img src="images/icon-linkedin.png" alt="LinkedIn" width="22" height="22" onerror="this.style.opacity='0'">
+        </a>
+        <a href="https://www.instagram.com/blueuhour/" aria-label="Instagram" class="pf-icon-link" target="_blank" rel="noopener noreferrer">
+          <img src="images/icon-instagram.png" alt="Instagram" width="22" height="22" onerror="this.style.opacity='0'">
+        </a>
+      </nav>
+      <a href="https://behance.net/kellyheng" class="pf-resume-btn" target="_blank" rel="noopener noreferrer" aria-label="More work on Behance">
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        MORE WORK
+      </a>
+    </div>
+  </footer>
+
+  <button class="btt-btn" id="bttBtn" aria-label="Back to top">
+    <svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12V4M4 8l4-4 4 4"/></svg>
+  </button>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.body.style.transition = 'none';
+    document.body.style.opacity = '1';
+    var animObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          animObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.cs-intro-row, .cs-section').forEach(function(el) {
+      el.classList.add('cs-scroll');
+      animObserver.observe(el);
+    });
+    function checkPillWrap() {
+      document.querySelectorAll('.cs-impact-pill').forEach(function(pill) {
+        var singleLineHeight = parseFloat(getComputedStyle(pill).lineHeight) + 16;
+        pill.classList.toggle('cs-impact-pill--wrapped', pill.offsetHeight > singleLineHeight);
+      });
+    }
+    checkPillWrap();
+    window.addEventListener('resize', checkPillWrap);
+  });
+  document.querySelectorAll('a[href]').forEach(function (link) {
+    var href = link.getAttribute('href');
+    if (
+      href &&
+      !href.startsWith('#') &&
+      !href.startsWith('mailto:') &&
+      !href.startsWith('http') &&
+      link.target !== '_blank'
+    ) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.body.style.opacity = '0';
+        setTimeout(function () { window.location.href = href; }, 300);
+      });
+    }
+  });
+  var bttBtn = document.getElementById('bttBtn');
+  function updateBtt() {
+    bttBtn.classList.toggle('visible', window.scrollY > 300);
+    var sentinel = document.querySelector('.pf-case-nav') || document.querySelector('.pf-footer');
+    var sentinelRect = sentinel.getBoundingClientRect();
+    if (sentinelRect.top < window.innerHeight) {
+      bttBtn.style.bottom = (window.innerHeight - sentinelRect.top + 16) + 'px';
+    } else {
+      bttBtn.style.bottom = '';
+    }
+  }
+  window.addEventListener('scroll', updateBtt);
+  updateBtt();
+  bttBtn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  </script>
+
+  <script>
+  (function () {
+    var cur = document.createElement('div');
+    cur.id = 'cursor';
+    document.body.appendChild(cur);
+    document.addEventListener('mousemove', function (e) {
+      cur.style.left = e.clientX + 'px';
+      cur.style.top  = e.clientY + 'px';
+    });
+    var sel = 'a, button, [role="button"], input, select, textarea, label, [tabindex]';
+    document.addEventListener('mouseover', function (e) {
+      if (e.target.closest(sel)) cur.classList.add('cursor--hover');
+    });
+    document.addEventListener('mouseout', function (e) {
+      if (e.target.closest(sel)) cur.classList.remove('cursor--hover');
+    });
+    document.documentElement.addEventListener('mouseleave', function () { cur.style.opacity = '0'; });
+    document.documentElement.addEventListener('mouseenter', function () { cur.style.opacity = ''; });
+  })();
+  </script>
+
+</body>
+</html>

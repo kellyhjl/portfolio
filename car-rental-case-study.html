@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Car Rental Case Study — Kelly Heng</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500&family=Geist:wght@300;400;500;600&family=Instrument+Serif&family=Roboto+Mono:wght@600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── ROOT / VARIABLES ───────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f6f7f2;
+      --text:      #1A1A1A;
+      --soft:      #3C3C3A;
+      --muted:     #9B9690;
+      --divider:   #E3E0D8;
+--page-pad:  64px;
+      --text-max:  680px;
+    }
+
+    /* ── BASE / RESET ───────────────────────── */
+    html {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Geist', -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    body { min-height: 100vh; opacity: 0; transition: opacity 0.3s ease; }
+    a    { color: inherit; text-decoration: none; }
+
+    /* ── OUTER WRAPPER ──────────────────────── */
+    .cs-outer {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 48px var(--page-pad) 96px;
+    }
+
+    /* ── BACK LINK ──────────────────────────── */
+
+
+    /* ── TITLE (above hero) ─────────────────── */
+    .cs-title {
+      font-family: 'Geist', -apple-system, sans-serif;
+      font-size: 41px; font-weight: 400; letter-spacing: -0.03em;
+      line-height: 1.1; padding-top: 14px; padding-bottom: 14px; margin-bottom: 28px;
+    }
+
+    /* ── HERO ───────────────────────────────── */
+    .cs-hero {
+      width: 100%;
+      aspect-ratio: 2.2 / 1;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 56px;
+    }
+    .cs-hero img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .cs-hero svg { display: block; width: 100%; height: 100%; }
+
+    /* ── INTRO ROW (context + meta) ─────────── */
+    .cs-intro-row {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 24px;
+      padding-bottom: 60px;
+      border-bottom: 1px dashed var(--divider);
+      margin-bottom: 72px;
+    }
+    .cs-intro-body { max-width: 680px; }
+    .cs-intro-body .section-label { margin-bottom: 14px; }
+    .cs-intro-lead {
+      font-size: 22px; font-weight: 500; line-height: 1.45;
+      letter-spacing: -0.015em;
+      color: var(--text); margin-bottom: 14px;
+    }
+    .cs-meta-col {
+      display: flex; flex-direction: column; gap: 24px;
+      padding-top: 2px;
+    }
+    .cs-meta-item { display: flex; flex-direction: column; gap: 5px; }
+    .cs-meta-label {
+      font-size: 16px; font-family: 'DM Mono', monospace; font-weight: 500;
+      letter-spacing: 0.01em; text-transform: uppercase; color: #C19A00;
+    }
+    .cs-meta-value { font-size: 15px; line-height: 1.5; }
+
+    /* ── BODY CONTENT ───────────────────────── */
+    .cs-section { margin-bottom: 72px; }
+
+    .section-label {
+      display: block; font-size: 16px; font-family: 'DM Mono', monospace; font-weight: 500;
+      letter-spacing: 0.01em; text-transform: uppercase; color: #C19A00; margin-bottom: 16px;
+    }
+
+    .cs-h2 {
+      font-family: 'Geist', -apple-system, sans-serif;
+      font-size: 32px; font-weight: 400; letter-spacing: -0.03em;
+      line-height: 1.15; margin-bottom: 12px; max-width: var(--text-max);
+    }
+
+    .cs-body { font-size: 15px; line-height: 1.5; color: var(--soft); max-width: var(--text-max); }
+    .cs-body + .cs-body { margin-top: 12px; }
+
+    .cs-problem { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 12px; line-height: 1.4; max-width: var(--text-max); }
+
+    .cs-sublist { margin-top: 8px; padding-left: 0; list-style: none; max-width: var(--text-max); }
+    .cs-sublist li { font-size: 15px; color: var(--soft); line-height: 1.5; padding-left: 22px; margin-bottom: 6px; position: relative; }
+    .cs-sublist li::before { content: '→'; position: absolute; left: 0; color: var(--muted); }
+
+    /* ── TABLE ──────────────────────────────── */
+    .cs-table-wrap { margin: 24px 0; border: 1px solid var(--divider); border-radius: 8px; overflow: hidden; }
+    .cs-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .cs-table th {
+      background: #EDEAE3; font-size: 13px; font-weight: 600; color: var(--soft);
+      padding: 10px 16px; text-align: left; border-bottom: 1px solid var(--divider);
+    }
+    .cs-table td { padding: 14px 16px; border-bottom: 1px solid var(--divider); color: var(--soft); vertical-align: top; line-height: 1.58; }
+    .cs-table tr:last-child td { border-bottom: none; }
+    .cs-table td:not(:last-child), .cs-table th:not(:last-child) { border-right: 1px solid var(--divider); }
+
+    /* ── LISTS ──────────────────────────────── */
+    .cs-list { list-style: none; margin-top: 20px; max-width: var(--text-max); }
+    .cs-list li {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 14px 0; border-bottom: 1px solid var(--divider);
+      font-size: 14px; color: var(--soft); line-height: 1.62;
+    }
+    .cs-list li:first-child { border-top: 1px solid var(--divider); }
+    .cs-list li::before {
+      content: ''; flex-shrink: 0; width: 5px; height: 5px;
+      border-radius: 50%; background: var(--muted); margin-top: 8px;
+    }
+    .cs-results li::before {
+      content: '→'; background: none; width: auto; height: auto;
+      border-radius: 0; font-size: 12px; color: var(--muted); margin-top: 1px;
+    }
+
+    /* ── SOLUTIONS ──────────────────────────── */
+    .solution-item { margin-bottom: 56px; }
+    .solution-item:last-child { margin-bottom: 0; }
+
+    /* ── MOCKUPS ────────────────────────────── */
+    .cs-mockup { position: relative; width: 100%; border-radius: 12px; overflow: hidden; margin-top: 24px; }
+    .cs-mockup svg { display: block; width: 100%; }
+    .cs-mockup img { display: block; width: 100%; height: auto; }
+    .cs-img-pair > div { position: relative; overflow: hidden; border-radius: 8px; }
+    .cs-caption {
+      position: absolute; bottom: 12px; left: 12px;
+      padding: 6px 14px;
+      background: #ffffff; border-radius: 100px;
+      font-size: 12px; color: var(--text);
+      opacity: 0; transform: translateY(4px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      white-space: nowrap;
+    }
+    .cs-mockup:hover .cs-caption,
+    .cs-img-pair > div:hover .cs-caption { opacity: 1; transform: translateY(0); }
+
+    /* ── IMAGE PAIR ─────────────────────────── */
+    .cs-img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+
+    /* ── THEME CARDS ───────────────────────── */
+    .cs-theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+    .cs-theme-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .cs-theme-card { border-radius: 12px; padding: 22px 24px; background: #FFF8E2; border: 0.5px solid #e3e3e3; }
+    .cs-theme-card-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; line-height: 1.32; }
+    .cs-theme-card .cs-sublist { margin-top: 0; }
+
+    /* ── DIVIDER ────────────────────────────── */
+    .cs-rule { border: none; border-top: 1px dashed var(--divider); margin: 0 0 72px; }
+
+    /* ── IMPACT PILLS ──────────────────────── */
+    .cs-impact { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+    .cs-impact-pill {
+      display: inline-block; align-self: flex-start;
+      padding: 8px 18px;
+      background: #FFF8E2; border-radius: 100px;
+      font-size: 13.5px; color: var(--soft); line-height: 1.4;
+    }
+    .cs-impact-pill--wrapped { border-radius: 12px; }
+
+    /* ── NOTE CALLOUT ───────────────────────── */
+    .cs-note { background: #ffffff; border: 0.5px solid #e3e3e3; border-radius: 12px; padding: 22px 24px; margin-top: 24px; max-width: var(--text-max); }
+    .cs-note p { font-size: 13.5px; line-height: 1.72; color: var(--soft); }
+    .cs-note p + p { margin-top: 10px; }
+
+    /* ── COMPARE CARD ───────────────────────── */
+    .cs-compare {
+      display: grid; grid-template-columns: 1fr 1fr;
+      background: #ffffff; border: 0.5px solid #e3e3e3; border-radius: 12px;
+      margin-top: 24px; overflow: hidden;
+    }
+    .cs-compare-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .cs-compare-col { padding: 22px 24px; }
+    .cs-compare-col + .cs-compare-col { border-left: 0.5px solid #e3e3e3; }
+    .cs-compare-label {
+      display: block; font-size: 16px; font-family: 'DM Mono', monospace;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 10px;
+    }
+    @media (max-width: 640px) {
+      .cs-compare { grid-template-columns: 1fr; }
+      .cs-compare-col + .cs-compare-col { border-left: none; border-top: 0.5px solid #e3e3e3; }
+    }
+
+    /* ── HERO CTA BUTTON ───────────────────── */
+    .cs-hero-wrap { display: block; position: relative; width: 100%; margin-bottom: 28px; border-radius: 16px; overflow: hidden; }
+    .cs-hero-wrap .cs-hero { margin-bottom: 0; }
+    .cs-hero-btn {
+      position: absolute; top: 16px; right: 16px;
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 16px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 100px;
+      font-size: 13px; font-weight: 500; color: var(--text);
+      text-decoration: none;
+      opacity: 0; transform: translateY(-8px);
+      transition: opacity 0.22s ease, transform 0.22s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .cs-hero-wrap:hover .cs-hero-btn {
+      opacity: 1; transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* ── RESULTS LAYOUT ─────────────────────── */
+    .cs-results-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+      margin-top: 16px;
+    }
+    .cs-results-images {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .cs-results-images > div { position: relative; overflow: hidden; border-radius: 8px; }
+    .cs-results-images img { display: block; width: 100%; height: auto; }
+    .cs-sublist-divided { max-width: none; }
+    .cs-sublist-divided li {
+      border-top: 1px solid var(--divider);
+      padding-top: 12px;
+      margin-bottom: 0;
+    }
+    .cs-sublist-divided li:first-child { border-top: none; padding-top: 0; }
+    @media (max-width: 700px) {
+      .cs-results-layout { grid-template-columns: 1fr; }
+    }
+
+    /* ── SCROLL ANIMATIONS ──────────────────────── */
+    .cs-scroll {
+      opacity: 0;
+      transform: translateY(7px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .cs-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ─────────────────────────── */
+    @media (max-width: 640px)  { :root { --page-pad: 20px; } }
+
+    @media (max-width: 960px) {
+      .cs-intro-row { grid-template-columns: 1fr; gap: 36px; }
+      .cs-meta-col { flex-direction: row; flex-wrap: wrap; gap: 24px 40px; }
+    }
+    @media (max-width: 768px) {
+      .cs-hero-btn { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    }
+
+    @media (max-width: 700px) {
+      .cs-title            { font-size: 32px; }
+      .cs-h2               { font-size: 28px; }
+      .cs-intro-lead       { font-size: 18px; }
+      .cs-img-pair         { grid-template-columns: 1fr; }
+      .cs-theme-grid,
+      .cs-theme-grid-3     { grid-template-columns: 1fr; }
+      .cs-table-wrap       { overflow-x: auto; }
+
+    }
+
+    /* ── BACK TO TOP ────────────────────────── */
+    .btt-btn {
+      position: fixed; bottom: 32px; right: 32px;
+      width: 66px; height: 66px; border-radius: 50%;
+      background: #fff; border: 1px solid var(--divider);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; opacity: 0; transform: translateY(8px);
+      transition: opacity 0.25s ease, transform 0.25s ease, background 0.15s ease, bottom 0.15s ease;
+      z-index: 100;
+    }
+    .btt-btn.visible { opacity: 1; transform: translateY(0); }
+    .btt-btn:hover { background: #F5F4F1; }
+
+    /* ── PORTFOLIO HEADER / FOOTER ─── */
+    .pf-header { background: #f6f7f2; padding-top: 32px; }
+    .pf-header-inner {
+      margin-left: 64px; margin-right: 64px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding-bottom: 32px;
+      border-bottom: 1px dashed #d0d0c8;
+    }
+    .pf-site-name {
+      font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 400;
+      letter-spacing: 0.01em; text-transform: uppercase; color: #777777;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+    }
+    .pf-header-right { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .pf-resume-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 400;
+      letter-spacing: 0.01em; text-transform: uppercase;
+      background: #e8e8e4; border-radius: 9999px; padding: 2px 6px;
+      color: #777777; text-decoration: none;
+      transition: background 0.18s ease;
+    }
+    .pf-resume-btn:hover { background: #deded9; }
+    .pf-email-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 400;
+      letter-spacing: 0.01em; text-transform: uppercase;
+      color: #777777; text-decoration: none; transition: transform 0.18s ease;
+    }
+    .pf-email-link:hover { transform: translateX(4px); }
+    .pf-footer { background: #f6f7f2; padding-bottom: 32px; }
+    .pf-footer-inner {
+      margin-left: 64px; margin-right: 64px;
+      border-top: 1px dashed #d0d0c8; padding-top: 32px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .pf-social-links { display: flex; align-items: center; gap: 8px; }
+    .pf-icon-link {
+      display: inline-flex; align-items: center; justify-content: center;
+      color: #777777; text-decoration: none; transition: color 0.18s ease;
+    }
+    .pf-icon-link:hover { color: #1a1a1a; }
+    .pf-all-work {
+      font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 400;
+      letter-spacing: 0.01em; text-transform: uppercase;
+      color: #777777; text-decoration: none; transition: color 0.18s ease;
+    }
+    .pf-all-work:hover { color: #1a1a1a; }
+    @media (max-width: 640px) {
+      .pf-header-inner, .pf-footer-inner { margin-left: 20px; margin-right: 20px; }
+    }
+
+    /* ── CUSTOM CURSOR ──────────────────────── */
+    ::selection { background: rgba(255, 218, 71, 0.3); color: inherit; }
+    * { cursor: none !important; }
+    #cursor {
+      position: fixed;
+      top: 0; left: 0;
+      width: 20px; height: 20px;
+      background: #FFDA47;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      opacity: 0.8;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border 0.2s ease, opacity 0.2s ease;
+    }
+    #cursor.cursor--hover {
+      width: 30px; height: 30px;
+      background: rgba(255, 218, 71, 0.5);
+      border: 1px solid #FFDA47;
+      opacity: 1;
+    }
+  
+    /* ── CASE NAVIGATION ───────────────────── */
+    .pf-case-nav { padding: 0 64px 48px; }
+    .pf-case-nav-inner { border-top: 1px dashed #d0d0c8; padding-top: 48px; }
+    .pf-case-nav-inner {
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 32px;
+    }
+    .pf-case-nav-link {
+      display: flex; flex-direction: column; gap: 6px;
+      text-decoration: none; color: inherit; max-width: 44%;
+      transition: opacity 0.2s ease;
+    }
+    .pf-case-nav-link:hover { opacity: 0.5; }
+    .pf-case-nav-link--next { text-align: right; margin-left: auto; }
+    .pf-case-nav-dir {
+      font-family: 'DM Mono', monospace; font-size: 12px;
+      letter-spacing: 0.05em; text-transform: uppercase; color: #9B9690;
+    }
+    .pf-case-nav-title {
+      font-size: 18px; font-weight: 400;
+      letter-spacing: -0.02em; line-height: 1.2; color: #1A1A1A;
+    }
+    .pf-case-nav-type {
+      font-family: 'DM Mono', monospace; font-size: 11px;
+      letter-spacing: 0.06em; text-transform: uppercase; color: #9B9690;
+    }
+    @media (max-width: 640px) {
+      .pf-case-nav { padding: 0 20px 32px; }
+      .pf-case-nav-link { max-width: 48%; }
+      .pf-case-nav-title { font-size: 15px; }
+    }
+  
+    /* ── PAGE ENTER ANIMATIONS ──────────────── */
+    @keyframes pf-home-in {
+      from { opacity: 0; transform: translateX(-10px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes pf-right-in {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes pf-content-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .pf-site-name    { animation: pf-home-in    0.38s ease-out 0.06s both; }
+    .pf-email-link    { animation: pf-right-in   0.32s ease-out 0.12s both; }
+    .cs-outer        { animation: pf-content-in 0.50s ease-out 0.08s both; }
+  </style>
+</head>
+<body>
+
+  <header class="pf-header">
+    <div class="pf-header-inner">
+      <a href="index.html" class="pf-site-name">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12 6.5H1.5M6 3.5L1.5 6.5 6 9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        HOME
+      </a>
+      <div class="pf-header-right">
+        <a href="mailto:kellyhengjl@gmail.com" class="pf-email-link" aria-label="Email Kelly Heng">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="0.75" y="2.25" width="11.5" height="8.5" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M0.75 4L6.5 7.5 12.25 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          KELLYHENGJL@GMAIL.COM
+        </a>
+        <a href="images/resume.pdf" class="pf-resume-btn" download aria-label="Download resume">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M6.5 1v7.5M3.5 6.5l3 2.5 3-2.5M1.5 11.5h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          RESUME
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main>
+    <div class="cs-outer">
+
+
+      <!-- Hero -->
+      <div class="cs-hero-wrap">
+        <div class="cs-hero">
+          <img src="images/car-hero.jpg" alt="Car Lite App" />
+        </div>
+        <a class="cs-hero-btn" href="https://apps.apple.com/sg/app/car-lite-carsharing/id6477532017" target="_blank" rel="noopener">
+          <span style="width:7px;height:7px;border-radius:50%;background:#5CB85C;flex-shrink:0;display:inline-block;"></span>
+          Live on App Store
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg>
+        </a>
+      </div>
+
+      <h1 class="cs-title">Designing a Mobile Car Rental Experience Users Trust</h1>
+
+      <!-- Intro row: context (left) + meta (right) -->
+      <div class="cs-intro-row">
+        <div class="cs-intro-body">
+          <span class="section-label">Context</span>
+          <p class="cs-body">In Singapore's car-sharing market, competitors had already shaped user expectations with mobile apps that prioritised speed, convenience, and usability.</p>
+          <p class="cs-body" style="margin-top:12px">Car Lite differentiated itself through competitive pricing and strong customer support, but its outdated website lacking mobile optimisation was becoming a limitation.</p>
+          <p class="cs-body" style="margin-top:12px">I was brought in to design and launch a mobile app to help the business remain competitive.</p>
+        </div>
+        <div class="cs-meta-col">
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">My Role</span>
+            <span class="cs-meta-value">UIUX Designer, PM, QA</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Team</span>
+            <span class="cs-meta-value">1 Mobile Dev, 1 Backend Dev</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Timeline</span>
+            <span class="cs-meta-value">2024 – 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Research -->
+      <div class="cs-section">
+        <span class="section-label">Research</span>
+        <p class="cs-body">To understand user behaviour, user expectations, and identify opportunities for improving Car Lite's mobile rental experience, a research plan was devised.</p>
+
+        <div class="cs-table-wrap">
+          <table class="cs-table">
+            <thead>
+              <tr>
+                <th style="width:30%">Research Goal</th>
+                <th style="width:35%">Method</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Understand what car-sharing users truly value</td>
+                <td>User interviews with existing car-sharing users (Car Lite customers and non-customers)</td>
+                <td>Explore motivations, concerns, and behaviours related to overall rental experience</td>
+              </tr>
+              <tr>
+                <td>Identify pain points and friction across existing rental journey</td>
+                <td>Journey mapping using customer support insights and user feedback</td>
+                <td>Map the rental flow to identify high-friction, high-stress moments and uncover opportunities for UX improvements</td>
+              </tr>
+              <tr>
+                <td>Understand how competitors shape user expectations</td>
+                <td>Competitor analysis, user interviews, competitive testing and secondary research</td>
+                <td>Understand expectations surrounding car-sharing, benchmark onboarding flows, booking experiences, and other features</td>
+              </tr>
+              <tr>
+                <td>Validate proposed improvements</td>
+                <td>Usability testing on prototypes</td>
+                <td>Evaluate whether users can efficiently complete key tasks eg. vehicle search, booking, and trip start/end flows</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cs-mockup">
+          <img src="images/car-research-2.jpg" alt="Journey Map of a Car Lite Customer" />
+        </div>
+
+        <div class="cs-theme-grid cs-theme-grid-3" style="margin-top:20px; align-items:stretch;">
+          <div class="cs-theme-card" style="background:#FEEAE7; display:flex; flex-direction:column; justify-content:flex-start; align-items:flex-start; border-radius:0; border:none;">
+            <p class="cs-theme-card-title">Car-sharing users optimise for self-protection</p>
+            <ul class="cs-sublist">
+              <li>Over-documenting vehicle condition</li>
+              <li>Reaching early before trips to inspect vehicles</li>
+              <li>Checking with the community (eg. Telegram groups) about the state of the vehicle before booking it</li>
+            </ul>
+          </div>
+          <div class="cs-theme-card" style="background:#FEEAE7; display:flex; flex-direction:column; justify-content:flex-start; align-items:flex-start; border-radius:0; border:none;">
+            <p class="cs-theme-card-title">Start and end trip flows are high-stress moments</p>
+            <ul class="cs-sublist">
+              <li>Excessive taps and steps required</li>
+              <li>Time-sensitive task</li>
+              <li>Conflict of wanting to complete it quickly yet document it thoroughly to protect themself</li>
+            </ul>
+          </div>
+          <div class="cs-theme-card" style="background:#FEEAE7; display:flex; flex-direction:column; justify-content:flex-start; align-items:flex-start; border-radius:0; border:none;">
+            <p class="cs-theme-card-title">Onboarding friction is shaped by user expectations</p>
+            <ul class="cs-sublist">
+              <li>Competitors already provide fast and low friction onboarding including Singpass sign-up, instant verification and no deposit payment</li>
+              <li>Car Lite's required multiple manual steps, deposit payment and delay before verification</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <hr class="cs-rule">
+
+      <!-- Strategy -->
+      <div class="cs-section">
+        <span class="section-label">Strategy</span>
+        <p class="cs-body">Upon reviewing the research findings with stakeholders, the primary goal set for the app release was to retain existing users, followed by reduce account sharing and fraudulent behaviour, then user acquisition.</p>
+        <p class="cs-body">Thus we defined success for V1 as:</p>
+        <ul class="cs-sublist">
+          <li>Driving adoption among existing users</li>
+          <li>Delivering a stable and reliable mobile experience</li>
+          <li>Reducing friction in high-frequency, high-risk flows</li>
+        </ul>
+        <p class="cs-body" style="margin-top:16px">I focused on improving the core rental journey to reduce frustration and pain points, and intentionally deferred higher effort initiatives such as Singpass integration, direct payments and vouchers to future iterations.</p>
+      </div>
+
+      <hr class="cs-rule">
+
+      <!-- Solution Highlights -->
+      <div class="cs-section">
+
+        <!-- 1 -->
+        <div class="solution-item">
+          <span class="section-label">Solution Highlight 1</span>
+          <h2 class="cs-h2">Search for available vehicles using map</h2>
+          <p class="cs-problem">Vehicle discovery lacked spatial context.</p>
+          <p class="cs-body">Search results were presented as static lists with text-based addresses, requiring users to mentally interpret proximity or rely on external tools like Google Maps.</p>
+          <p class="cs-body">To address this, I redesigned the flow into a map-first, location-aware experience anchored to the user's real-time location, where vehicle availability is displayed directly through map pins based on the selected date and time.</p>
+
+          <div class="cs-img-pair">
+            <div>
+              <img src="images/car-sol1a.jpg" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
+              <p class="cs-caption">Vehicle Search on Web (Before)</p>
+            </div>
+            <div>
+              <img src="images/car-sol1b.jpg" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
+              <p class="cs-caption">Prototyping</p>
+            </div>
+          </div>
+
+          <div class="cs-mockup">
+            <img src="images/car-sol1.jpg" alt="Vehicle discovery map view" />
+            <p class="cs-caption">Vehicle search on App (After)</p>
+          </div>
+          <div class="cs-impact">
+            <span class="cs-impact-pill">Users could quickly identify, compare, and select nearby vehicles without leaving the map.</span>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="solution-item">
+          <span class="section-label">Solution Highlight 2</span>
+          <h2 class="cs-h2">Streamlined start and end trip flow</h2>
+          <p class="cs-problem">Trip start and end flows were inefficient and error-prone.</p>
+          <p class="cs-body">For a user capturing an average of 4 angles and 3 photos of external damages,</p>
+          <ul class="cs-sublist" style="margin-top:8px;">
+            <li><strong>Before, on the website:</strong> At least 17 taps required before the car can be unlocked.</li>
+            <li><strong>After, on the app:</strong> Only 9 taps through guided, sequential photo capture using a custom in-app camera, and a car diagram to help users correctly identify required angles.</li>
+          </ul>
+
+          <div class="cs-img-pair">
+            <div>
+              <img src="images/car-sol2-pre-a.jpg" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
+              <p class="cs-caption">Start Trip for Website (Before)</p>
+            </div>
+            <div>
+              <img src="images/car-sol2-pre-b.jpg" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
+              <p class="cs-caption">Drafts</p>
+            </div>
+          </div>
+          <div class="cs-mockup" style="margin-top:12px">
+            <img src="images/car-sol2.jpg" alt="Streamlined start and end trip flow" />
+            <p class="cs-caption">Refined Start and End Trip screens</p>
+          </div>
+          <div class="cs-compare">
+            <div class="cs-compare-col">
+              <span class="cs-compare-label">Website (Before)</span>
+              <p class="cs-body">Users could pre-capture photos with their phone camera and upload photos from their camera roll when it's time to start trip. This was problematic for the operations team as users could edit photos and culprits can get away with damaging the car.</p>
+            </div>
+            <div class="cs-compare-col">
+              <span class="cs-compare-label">App (After)</span>
+              <p class="cs-body">To balance business and user needs, camera roll uploads were disallowed and users had to capture photos directly using the in-app camera only, but automatic save to camera roll was introduced so that users could still choose to keep their own copy of the photos. Start and end trip photos were also displayed in the booking details viewable after trip fulfilment.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="solution-item">
+          <span class="section-label">Solution Highlight 3</span>
+          <h2 class="cs-h2">State-Driven UI &amp; Visual Hierarchy</h2>
+          <p class="cs-body">The previous interface was dense and text-heavy, making it difficult to locate relevant information.</p>
+          <p class="cs-body">I restructured the experience to be state-driven:</p>
+          <ul class="cs-sublist">
+            <li>Tabs for ongoing, upcoming, and past bookings</li>
+            <li>Elevated key actions through hierarchy</li>
+            <li>Reduced reliance on text through clearer layout and grouping</li>
+          </ul>
+
+          <div class="cs-mockup">
+            <img src="images/car-sol3.jpg" alt="State-driven UI and visual hierarchy" />
+            <p class="cs-caption">App UI (After)</p>
+          </div>
+          <div class="cs-impact">
+            <span class="cs-impact-pill">This allowed users to quickly orient themselves and act without scanning unnecessary information.</span>
+          </div>
+        </div>
+
+      </div><!-- /solution highlights -->
+
+      <!-- Results -->
+      <div class="cs-section">
+        <span class="section-label">Results</span>
+        <p class="cs-body">After rounds of internal testing and beta testing, the app successfully launched in <strong>May 2024</strong>.</p>
+        <p class="cs-body" style="margin-top:12px">Within 3 months, the app had an <strong>86% adoption rate</strong>, with most users transitioning from app to web while the website remained as a secondary fallback channel. The app also established a strong foundation for future features that I worked on with my team, such as signing up with Singpass.</p>
+
+        <div class="cs-compare cs-compare-3" style="margin-top:24px;">
+          <div class="cs-compare-col">
+            <p class="cs-theme-card-title">Error rates reduced</p>
+            <p class="cs-body" style="margin-top:6px;">In critical flows such as booking start end trip</p>
+          </div>
+          <div class="cs-compare-col">
+            <p class="cs-theme-card-title">Improved trust</p>
+            <p class="cs-body" style="margin-top:6px;">Through increased transparency and clear documentation</p>
+          </div>
+          <div class="cs-compare-col">
+            <p class="cs-theme-card-title">Positive user feedback</p>
+            <p class="cs-body" style="margin-top:6px;">Highlighting speed, reliability and usability</p>
+          </div>
+        </div>
+
+        <div class="cs-img-pair" style="margin-top:24px;">
+          <div>
+            <img src="images/car-result1.jpg" alt="Car Lite app results" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
+            <p class="cs-caption">QA test cases</p>
+          </div>
+          <div>
+            <img src="images/car-result2.jpg" alt="Car Lite app results" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
+            <p class="cs-caption">Positive app reviews</p>
+          </div>
+        </div>
+        <div class="cs-mockup" style="margin-top:12px;">
+          <img src="images/car-result3.jpg" alt="Other completed features" />
+          <p class="cs-caption">Other completed features</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- CASE NAVIGATION -->
+  <nav class="pf-case-nav">
+    <div class="pf-case-nav-inner">
+      <div></div>
+      <a href="hrapp-case-study.html" class="pf-case-nav-link pf-case-nav-link--next">
+      <span class="pf-case-nav-dir">Next →</span>
+      <span class="pf-case-nav-title">Streamlining Leave, Attendance, and Workforce Availability</span>
+      <span class="pf-case-nav-type">MOBILE</span>
+    </a>
+    </div>
+  </nav>
+  <footer class="pf-footer">
+    <div class="pf-footer-inner">
+      <nav class="pf-social-links">
+        <a href="https://www.linkedin.com/in/kellyhengjl/" aria-label="LinkedIn" class="pf-icon-link" target="_blank" rel="noopener noreferrer">
+          <img src="images/icon-linkedin.png" alt="LinkedIn" width="22" height="22" onerror="this.style.opacity='0'">
+        </a>
+        <a href="https://www.instagram.com/blueuhour/" aria-label="Instagram" class="pf-icon-link" target="_blank" rel="noopener noreferrer">
+          <img src="images/icon-instagram.png" alt="Instagram" width="22" height="22" onerror="this.style.opacity='0'">
+        </a>
+      </nav>
+      <a href="https://behance.net/kellyheng" class="pf-resume-btn" target="_blank" rel="noopener noreferrer" aria-label="More work on Behance">
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        MORE WORK
+      </a>
+    </div>
+  </footer>
+
+  <button class="btt-btn" id="bttBtn" aria-label="Back to top">
+    <svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12V4M4 8l4-4 4 4"/></svg>
+  </button>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.body.style.transition = 'none';
+    document.body.style.opacity = '1';
+    var animObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          animObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.cs-intro-row, .cs-section').forEach(function(el) {
+      el.classList.add('cs-scroll');
+      animObserver.observe(el);
+    });
+    function checkPillWrap() {
+      document.querySelectorAll('.cs-impact-pill').forEach(function(pill) {
+        var singleLineHeight = parseFloat(getComputedStyle(pill).lineHeight) + 16;
+        pill.classList.toggle('cs-impact-pill--wrapped', pill.offsetHeight > singleLineHeight);
+      });
+    }
+    checkPillWrap();
+    window.addEventListener('resize', checkPillWrap);
+  });
+  document.querySelectorAll('a[href]').forEach(function (link) {
+    var href = link.getAttribute('href');
+    if (
+      href &&
+      !href.startsWith('#') &&
+      !href.startsWith('mailto:') &&
+      !href.startsWith('http') &&
+      link.target !== '_blank'
+    ) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.body.style.opacity = '0';
+        setTimeout(function () { window.location.href = href; }, 300);
+      });
+    }
+  });
+  var bttBtn = document.getElementById('bttBtn');
+  function updateBtt() {
+    bttBtn.classList.toggle('visible', window.scrollY > 300);
+    var sentinel = document.querySelector('.pf-case-nav') || document.querySelector('.pf-footer');
+    var sentinelRect = sentinel.getBoundingClientRect();
+    if (sentinelRect.top < window.innerHeight) {
+      bttBtn.style.bottom = (window.innerHeight - sentinelRect.top + 16) + 'px';
+    } else {
+      bttBtn.style.bottom = '';
+    }
+  }
+  window.addEventListener('scroll', updateBtt);
+  updateBtt();
+  bttBtn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  </script>
+
+  <script>
+  (function () {
+    var cur = document.createElement('div');
+    cur.id = 'cursor';
+    document.body.appendChild(cur);
+    document.addEventListener('mousemove', function (e) {
+      cur.style.left = e.clientX + 'px';
+      cur.style.top  = e.clientY + 'px';
+    });
+    var sel = 'a, button, [role="button"], input, select, textarea, label, [tabindex]';
+    document.addEventListener('mouseover', function (e) {
+      if (e.target.closest(sel)) cur.classList.add('cursor--hover');
+    });
+    document.addEventListener('mouseout', function (e) {
+      if (e.target.closest(sel)) cur.classList.remove('cursor--hover');
+    });
+    document.documentElement.addEventListener('mouseleave', function () { cur.style.opacity = '0'; });
+    document.documentElement.addEventListener('mouseenter', function () { cur.style.opacity = ''; });
+  })();
+  </script>
+
+</body>
+</html>

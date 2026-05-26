@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelly Heng — UI/UX Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ══════════ HEADER ══════════ -->
+  <header>
+    <div class="header-inner">
+      <a href="mailto:kellyhengjl@gmail.com" class="email-link" aria-label="Email Kelly Heng">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="0.75" y="2.25" width="11.5" height="8.5" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M0.75 4L6.5 7.5 12.25 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        KELLYHENGJL@GMAIL.COM
+      </a>
+
+      <a href="images/resume.pdf" class="resume-btn" download aria-label="Download resume">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M6.5 1v7.5M3.5 6.5l3 2.5 3-2.5M1.5 11.5h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        RESUME
+      </a>
+    </div>
+  </header>
+
+  <!-- ══════════ MAIN ══════════ -->
+  <main>
+    <div class="main-inner">
+
+      <!-- Left column: bio -->
+      <div class="left-col">
+        <div class="intro-block">
+          <div class="intro-trigger" id="introTrigger" role="button" tabindex="0" aria-label="About Kelly">
+            <img
+              src="images/avatar.png"
+              alt="Kelly Heng"
+              class="avatar"
+              onerror="this.style.display='none'"
+            >
+            <div class="intro-meta">
+              <h1>Kelly Heng</h1>
+              <p class="role"><span class="open-to-work-dot"></span>Open to Work</p>
+            </div>
+          </div>
+          <button class="about-back-btn" id="aboutBackBtn">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M12 6.5H1.5M6 3.5L1.5 6.5 6 9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            BACK
+          </button>
+        </div>
+
+        <div class="bio">
+          <p>
+            Hello, I'm Kelly! Based in Singapore<img src="images/singapore.png" class="inline-icon" alt="" onerror="this.style.display='none'">, I'm a <span class="pill" id="pillTrigger" role="button" tabindex="0">UI/UX designer</span> focused on turning problems into solutions that balance user needs, business goals, and technical constraints.
+          </p>
+          <p>
+            I discovered user interface and experience design while pursuing my marketing degree at Singapore University of Social Sciences<img src="images/suss.png" class="inline-icon" alt="" onerror="this.style.display='none'">.
+          </p>
+          <p>
+            What started as curiosity during my internships quickly grew into a clear direction. I'm drawn to problem-solving<img src="images/problem-solving.png" class="inline-icon" alt="" onerror="this.style.display='none'"> and I enjoy building products that are both useful<img src="images/useful.png" class="inline-icon" alt="" onerror="this.style.display='none'"> and meaningful.
+          </p>
+          <p>
+            I use tools like Figma<img src="images/figma.png" class="inline-icon" alt="" onerror="this.style.display='none'">, Claude<img src="images/claude.png" class="inline-icon" alt="" onerror="this.style.display='none'">, Framer<img src="images/framer.png" class="inline-icon" alt="" onerror="this.style.display='none'"> and Notion<img src="images/notion.png" class="inline-icon" alt="" onerror="this.style.display='none'"> to work.
+          </p>
+        </div>
+
+        <!-- ABOUT PANEL -->
+        <div class="about-panel" id="aboutPanel">
+          <div class="about-group">
+            <div class="about-group-icon-col">
+              <img src="images/icon-experience.png" class="about-group-icon" alt="" onerror="this.style.display='none'">
+            </div>
+            <ul class="about-list">
+              <li class="about-item">
+                <div class="about-item-body">
+                  <span class="about-company">Car Lite</span>
+                  <span class="about-role">UI/UX Designer</span>
+                </div>
+                <span class="about-year">2023 – 2026</span>
+              </li>
+              <li class="about-item">
+                <div class="about-item-body">
+                  <span class="about-company">Me3</span>
+                  <span class="about-role">UI/UX Designer</span>
+                </div>
+                <span class="about-year">2022 – 2023</span>
+              </li>
+              <li class="about-item">
+                <div class="about-item-body">
+                  <span class="about-company">Envision Digital</span>
+                  <span class="about-role">Marketing Intern</span>
+                </div>
+                <span class="about-year">2021</span>
+              </li>
+              <li class="about-item">
+                <div class="about-item-body">
+                  <span class="about-company">Regtank Technology</span>
+                  <span class="about-role">Creative Design Intern</span>
+                </div>
+                <span class="about-year">2020</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="about-group">
+            <div class="about-group-icon-col">
+              <img src="images/icon-certifications.png" class="about-group-icon" alt="" onerror="this.style.display='none'">
+            </div>
+            <ul class="about-list">
+              <li class="about-item">
+                <div class="about-item-body">
+                  <span class="about-company">UX Design Course</span>
+                  <span class="about-role">CuriousCore</span>
+                </div>
+              </li>
+              <li class="about-item">
+                <div class="about-item-body">
+                  <span class="about-company">Foundations of UX Design</span>
+                  <span class="about-role">Coursera</span>
+                </div>
+              </li>
+              <li class="about-item">
+                <div class="about-item-body">
+                  <span class="about-company">Build a Website</span>
+                  <span class="about-role">Codecademy</span>
+                </div>
+              </li>
+              <li class="about-item">
+                <div class="about-item-body">
+                  <span class="about-company">Google Analytics 4</span>
+                  <span class="about-role">LinkedIn Learning</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right column: CASES -->
+      <aside class="right-col" aria-label="Case studies">
+        <p class="section-label">MY WORK</p>
+
+        <!-- list view hidden; using 2×2 gallery instead -->
+        <ul class="cases-list" style="display:none">
+
+          <li>
+            <a href="car-rental-case-study.html" class="case-item-link" aria-label="Car Rental case study">
+              <div class="case-thumb">
+                <img src="images/icon-mobile.png" alt="Mobile" class="case-icon" onerror="this.style.opacity='0'">
+              </div>
+              <div class="case-item-body">
+                <p class="case-item-title">Designing a Mobile Car Rental Experience Users Trust</p>
+                <p class="case-item-meta">MOBILE</p>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a href="hrapp-case-study.html" class="case-item-link" aria-label="HR App case study">
+              <div class="case-thumb">
+                <img src="images/icon-mobile.png" alt="Mobile" class="case-icon" onerror="this.style.opacity='0'">
+              </div>
+              <div class="case-item-body">
+                <p class="case-item-title">Streamlining Leave, Attendance, and Workforce Availability</p>
+                <p class="case-item-meta">MOBILE</p>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a href="booking-case-study.html" class="case-item-link" aria-label="Booking system case study">
+              <div class="case-thumb">
+                <img src="images/icon-desktop.png" alt="Desktop" class="case-icon" onerror="this.style.opacity='0'">
+              </div>
+              <div class="case-item-body">
+                <p class="case-item-title">Booking &amp; Accounting System</p>
+                <p class="case-item-meta">DESKTOP</p>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a href="me3-case-study.html" class="case-item-link" aria-label="Wallet UX case study">
+              <div class="case-thumb">
+                <img src="images/icon-mobile.png" alt="Mobile" class="case-icon" onerror="this.style.opacity='0'">
+              </div>
+              <div class="case-item-body">
+                <p class="case-item-title">Wallet UX for Mainstream Adoption</p>
+                <p class="case-item-meta">MOBILE</p>
+              </div>
+            </a>
+          </li>
+
+        </ul>
+
+        <!-- 2×2 gallery grid -->
+        <div class="work-grid">
+          <a href="car-rental-case-study.html" class="case-tile tile-pink" aria-label="Car Rental case study" data-title="Designing a Mobile Car Rental Experience Users Trust" data-hero="images/car-hero.jpg">
+            <img src="images/car-preview.jpg" alt="Car Rental" class="tile-img">
+            <span class="tile-glyph tile-glyph--dark" aria-hidden="true">✦</span>
+          </a>
+          <a href="hrapp-case-study.html" class="case-tile tile-dark" aria-label="HR App case study" data-title="Streamlining Leave, Attendance, and Workforce Availability" data-hero="images/wf-hero.jpg">
+            <img src="images/hr-preview.jpg" alt="HR App" class="tile-img">
+            <span class="tile-glyph tile-glyph--light" aria-hidden="true">✦</span>
+          </a>
+          <a href="booking-case-study.html" class="case-tile tile-dark" aria-label="Booking System case study" data-title="Booking &amp; Accounting System" data-hero="images/booking-hero.jpg">
+            <img src="images/system-preview.jpg" alt="Booking System" class="tile-img">
+            <span class="tile-glyph tile-glyph--light" aria-hidden="true">✦</span>
+          </a>
+          <a href="me3-case-study.html" class="case-tile tile-dark" aria-label="ME3 Wallet case study" data-title="Wallet UX for Mainstream Adoption" data-hero="images/me3-hero.jpg">
+            <img src="images/me3-preview.jpg" alt="ME3 Wallet" class="tile-img">
+            <span class="tile-glyph tile-glyph--light" aria-hidden="true">✦</span>
+          </a>
+          <!-- WORK EXPAND OVERLAY — remove this div + .work-expand CSS + script to revert -->
+          <div class="work-expand" aria-hidden="true" tabindex="0">
+            <img class="work-expand__img" alt="">
+            <p class="work-expand__title"></p>
+          </div>
+        </div>
+
+        <!-- ABOUT STAMPS PANEL -->
+        <div class="stamps-panel" id="stampsPanel">
+          <img src="images/uiux-stamp.png" class="stamp stamp-uiux" alt="UI/UX Design" onerror="this.style.opacity='0'">
+          <img src="images/education-stamp.png" class="stamp stamp-education" alt="Education" onerror="this.style.opacity='0'">
+          <img src="images/photography-stamp.png" class="stamp stamp-photography" alt="Photography" onerror="this.style.opacity='0'">
+          <img src="images/handball-stamp.png" class="stamp stamp-handball" alt="Handball" onerror="this.style.opacity='0'">
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer>
+    <div class="footer-inner">
+      <nav class="social-links" aria-label="Social links">
+        <a href="https://www.linkedin.com/in/kellyhengjl/" aria-label="LinkedIn" class="icon-link" target="_blank" rel="noopener noreferrer">
+          <img src="images/icon-linkedin.png" alt="LinkedIn" width="22" height="22" onerror="this.style.opacity='0'">
+        </a>
+        <a href="https://www.instagram.com/blueuhour/" aria-label="Instagram" class="icon-link" target="_blank" rel="noopener noreferrer">
+          <img src="images/icon-instagram.png" alt="Instagram" width="22" height="22" onerror="this.style.opacity='0'">
+        </a>
+      </nav>
+      <a href="https://behance.net/kellyheng" class="resume-btn" target="_blank" rel="noopener noreferrer" aria-label="More work on Behance">
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        MORE WORK
+      </a>
+    </div>
+  </footer>
+
+  <!-- ABOUT PANEL TOGGLE — remove this script block to revert -->
+  <script>
+  (function () {
+    var trigger     = document.getElementById('introTrigger');
+    var pill        = document.getElementById('pillTrigger');
+    var backBtn     = document.getElementById('aboutBackBtn');
+    var bio         = document.querySelector('.bio');
+    var label       = document.querySelector('.section-label');
+    var workGrid    = document.querySelector('.work-grid');
+    var aboutPanel  = document.getElementById('aboutPanel');
+    var stampsPanel = document.getElementById('stampsPanel');
+    if (!trigger || !backBtn || !bio || !aboutPanel || !stampsPanel) return;
+
+    var FADE   = 280;
+    var isOpen = false;
+
+    function openAbout() {
+      if (isOpen) return;
+      isOpen = true;
+
+      bio.style.opacity      = '0';
+      label.style.opacity    = '0';
+      workGrid.style.opacity = '0';
+
+      setTimeout(function () {
+        bio.style.display      = 'none';
+        label.style.display    = 'none';
+        workGrid.style.display = 'none';
+
+        aboutPanel.style.display  = 'flex';
+        aboutPanel.style.opacity  = '0';
+        stampsPanel.style.display = 'flex';
+        stampsPanel.style.opacity = '0';
+        backBtn.style.display     = 'inline-flex';
+        backBtn.style.opacity     = '0';
+
+        void aboutPanel.offsetHeight;
+
+        aboutPanel.style.opacity  = '1';
+        stampsPanel.style.opacity = '1';
+        backBtn.style.opacity     = '1';
+      }, FADE);
+    }
+
+    function closeAbout() {
+      if (!isOpen) return;
+      isOpen = false;
+
+      aboutPanel.style.opacity  = '0';
+      stampsPanel.style.opacity = '0';
+      backBtn.style.opacity     = '0';
+
+      setTimeout(function () {
+        aboutPanel.style.display  = 'none';
+        stampsPanel.style.display = 'none';
+        backBtn.style.display     = 'none';
+
+        bio.style.display      = 'flex';
+        bio.style.opacity      = '0';
+        label.style.display    = 'block';
+        label.style.opacity    = '0';
+        workGrid.style.display = 'grid';
+        workGrid.style.opacity = '0';
+
+        void bio.offsetHeight;
+
+        bio.style.opacity      = '1';
+        label.style.opacity    = '1';
+        workGrid.style.opacity = '1';
+      }, FADE);
+    }
+
+    trigger.addEventListener('click', function () { isOpen ? closeAbout() : openAbout(); });
+    trigger.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); isOpen ? closeAbout() : openAbout(); }
+    });
+    if (pill) {
+      pill.addEventListener('click', openAbout);
+      pill.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openAbout(); }
+      });
+    }
+    backBtn.addEventListener('click', closeAbout);
+  })();
+  </script>
+
+  <!-- GALLERY HOVER EXPAND — remove this script block to revert -->
+  <script>
+  (function () {
+    var grid     = document.querySelector('.work-grid');
+    var expand   = document.querySelector('.work-expand');
+    var expImg   = expand ? expand.querySelector('.work-expand__img')   : null;
+    var expTitle = expand ? expand.querySelector('.work-expand__title') : null;
+    if (!grid || !expand) return;
+
+    document.querySelectorAll('.case-tile').forEach(function (tile) {
+      tile.addEventListener('mouseenter', function () {
+        var img = tile.querySelector('.tile-img');
+        expImg.src           = tile.dataset.hero || (img ? img.getAttribute('src') : '');
+        expImg.style.height  = grid.offsetHeight + 'px';
+        expTitle.textContent = tile.dataset.title || '';
+        expand.classList.add('is-active');
+      });
+      /* Close the moment cursor leaves a tile — no buffer, gaps count as outside */
+      tile.addEventListener('mouseleave', function () {
+        expand.classList.remove('is-active');
+      });
+    });
+  })();
+  </script>
+
+  <!-- STAMP BRING-TO-FRONT: hover on cursor devices, tap on touch -->
+  <script>
+  (function () {
+    var stamps    = document.querySelectorAll('.stamp');
+    var hasCursor = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    if (hasCursor) {
+      /* ── Desktop / cursor: mouseenter shows, mouseleave resets ── */
+      stamps.forEach(function (stamp) {
+        stamp.addEventListener('mouseenter', function () {
+          stamps.forEach(function (s) { s.classList.remove('is-front'); });
+          stamp.classList.add('is-front');
+        });
+        stamp.addEventListener('mouseleave', function () {
+          stamp.classList.remove('is-front');
+        });
+      });
+    } else {
+      /* ── Touch / no cursor: tap to show, tap outside to reset ── */
+      stamps.forEach(function (stamp) {
+        stamp.addEventListener('click', function (e) {
+          e.stopPropagation(); /* prevent bubbling to the document reset below */
+          stamps.forEach(function (s) { s.classList.remove('is-front'); });
+          stamp.classList.add('is-front');
+        });
+      });
+      document.addEventListener('click', function () {
+        stamps.forEach(function (s) { s.classList.remove('is-front'); });
+      });
+    }
+  })();
+  </script>
+
+  <!-- CASE STUDY EXIT ANIMATION -->
+  <script>
+  (function () {
+    document.querySelectorAll('.case-tile').forEach(function (tile) {
+      tile.addEventListener('click', function (e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        var href = tile.getAttribute('href');
+
+        /* Close the expand overlay */
+        var expand = document.querySelector('.work-expand');
+        if (expand) expand.classList.remove('is-active');
+
+        /* Email slides right and fades — mirrors landing position in case study header */
+        var emailEl = document.querySelector('.email-link');
+        emailEl.style.transition = 'transform 0.30s ease-out, opacity 0.28s ease';
+        emailEl.style.transform  = 'translateX(52px)';
+        emailEl.style.opacity    = '0';
+
+        /* Main content fades out and drifts up slightly */
+        var mainInner = document.querySelector('.main-inner');
+        mainInner.style.transition = 'opacity 0.26s ease, transform 0.26s ease';
+        mainInner.style.opacity    = '0';
+        mainInner.style.transform  = 'translateY(-8px)';
+
+        setTimeout(function () { window.location.href = href; }, 340);
+      });
+    });
+  })();
+  </script>
+
+  <script>
+  (function () {
+    var cur = document.createElement('div');
+    cur.id = 'cursor';
+    document.body.appendChild(cur);
+    document.addEventListener('mousemove', function (e) {
+      cur.style.left = e.clientX + 'px';
+      cur.style.top  = e.clientY + 'px';
+    });
+    var sel = 'a, button, [role="button"], input, select, textarea, label, [tabindex], .stamp';
+    document.addEventListener('mouseover', function (e) {
+      if (e.target.closest(sel)) cur.classList.add('cursor--hover');
+    });
+    document.addEventListener('mouseout', function (e) {
+      if (e.target.closest(sel)) cur.classList.remove('cursor--hover');
+    });
+    document.documentElement.addEventListener('mouseleave', function () { cur.style.opacity = '0'; });
+    document.documentElement.addEventListener('mouseenter', function () { cur.style.opacity = ''; });
+  })();
+  </script>
+
+</body>
+</html>

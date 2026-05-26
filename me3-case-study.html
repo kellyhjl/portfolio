@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ME3 Wallet — Kelly Heng</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500&family=Geist:wght@300;400;500;600&family=Instrument+Serif&family=Roboto+Mono:wght@600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── ROOT / VARIABLES ───────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f6f7f2;
+      --text:      #1A1A1A;
+      --soft:      #3C3C3A;
+      --muted:     #9B9690;
+      --divider:   #E3E0D8;
+      --page-pad:  64px;
+      --text-max:  680px;
+      --case:      #6D28D9;
+    }
+
+    /* ── BASE / RESET ───────────────────────── */
+    html {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Geist', -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    body { min-height: 100vh; opacity: 0; transition: opacity 0.3s ease; }
+    a    { color: inherit; text-decoration: none; }
+
+    /* ── OUTER WRAPPER ──────────────────────── */
+    .cs-outer {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 48px var(--page-pad) 96px;
+    }
+
+    /* ── BACK LINK ──────────────────────────── */
+
+
+    /* ── TITLE ──────────────────────────────── */
+    .cs-title {
+      font-family: 'Geist', -apple-system, sans-serif;
+      font-size: 41px; font-weight: 400; letter-spacing: -0.03em;
+      line-height: 1.1; padding-top: 14px; padding-bottom: 14px; margin-bottom: 28px;
+    }
+
+    /* ── HERO ───────────────────────────────── */
+    .cs-hero {
+      width: 100%;
+      aspect-ratio: 2.2 / 1;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+    .cs-hero img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+    /* ── INTRO ROW ──────────────────────────── */
+    .cs-intro-row {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 24px;
+      padding-bottom: 60px;
+      border-bottom: 1px dashed var(--divider);
+      margin-bottom: 72px;
+    }
+    .cs-intro-body { max-width: 680px; }
+    .cs-intro-body .section-label { margin-bottom: 14px; }
+    .cs-intro-lead {
+      font-size: 22px; font-weight: 500; line-height: 1.45;
+      letter-spacing: -0.015em;
+      color: var(--text); margin-bottom: 14px;
+    }
+    .cs-meta-col {
+      display: flex; flex-direction: column; gap: 24px;
+      padding-top: 2px;
+    }
+    .cs-meta-item { display: flex; flex-direction: column; gap: 5px; }
+    .cs-meta-label {
+      font-size: 16px; font-family: 'DM Mono', monospace; font-weight: 500;
+      letter-spacing: 0.01em; text-transform: uppercase; color: #B901FB;
+    }
+    .cs-meta-value { font-size: 15px; line-height: 1.5; }
+
+    /* ── BODY CONTENT ───────────────────────── */
+    .cs-section { margin-bottom: 72px; }
+
+    .section-label {
+      display: block; font-size: 16px; font-family: 'DM Mono', monospace; font-weight: 500;
+      letter-spacing: 0.01em; text-transform: uppercase; color: #B901FB; margin-bottom: 16px;
+    }
+
+    .cs-h2 {
+      font-family: 'Geist', -apple-system, sans-serif;
+      font-size: 32px; font-weight: 400; letter-spacing: -0.03em;
+      line-height: 1.15; margin-bottom: 12px; max-width: var(--text-max);
+    }
+
+    .cs-body { font-size: 15px; line-height: 1.5; color: var(--soft); max-width: var(--text-max); }
+    .cs-body + .cs-body { margin-top: 12px; }
+
+    .cs-sublist { margin-top: 8px; padding-left: 0; list-style: none; max-width: var(--text-max); }
+    .cs-sublist li { font-size: 15px; color: var(--soft); line-height: 1.5; padding-left: 22px; margin-bottom: 6px; position: relative; }
+    .cs-sublist li::before { content: '→'; position: absolute; left: 0; color: var(--muted); }
+
+    /* ── HMW CALLOUTS ───────────────────────── */
+    .cs-hmw { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; max-width: var(--text-max); }
+    .cs-hmw-quote {
+      background: #ffffff; border: 0.5px solid #e3e3e3; border-radius: 12px;
+      padding: 18px 22px;
+      font-size: 15px; line-height: 1.55; color: var(--soft); font-style: italic;
+    }
+
+    /* ── SOLUTIONS ──────────────────────────── */
+    .solution-item { margin-bottom: 56px; }
+    .solution-item:last-child { margin-bottom: 0; }
+    .solution-row { display: flex; gap: 48px; align-items: center; justify-content: flex-start; }
+    .solution-row--reverse { flex-direction: row-reverse; justify-content: flex-end; }
+    .solution-text { flex: 0 1 680px; }
+    .solution-media { flex: 1; }
+    .solution-media .cs-mockup { margin-top: 0; background: #FEFEFE; display: flex; justify-content: center; align-items: center; max-height: 300px; }
+    .solution-media .cs-mockup img { width: auto; height: auto; max-height: 300px; }
+    @media (max-width: 700px) {
+      .solution-row, .solution-row--reverse { flex-direction: column; justify-content: flex-start; }
+    }
+    .cs-rule { border: none; border-top: 1px dashed var(--divider); margin: 0 0 72px; }
+
+    /* ── MOCKUPS ────────────────────────────── */
+    .cs-mockup { position: relative; width: 100%; border-radius: 12px; overflow: hidden; margin-top: 24px; }
+    .cs-mockup img { display: block; width: 100%; height: auto; }
+    .cs-img-pair > div { position: relative; overflow: hidden; border-radius: 8px; }
+    .cs-caption {
+      position: absolute; bottom: 12px; left: 12px;
+      padding: 6px 14px;
+      background: #ffffff; border-radius: 100px;
+      font-size: 12px; color: var(--text);
+      opacity: 0; transform: translateY(4px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      white-space: nowrap;
+    }
+    .cs-mockup:hover .cs-caption,
+    .cs-img-pair > div:hover .cs-caption { opacity: 1; transform: translateY(0); }
+
+    /* ── IMAGE PAIR ─────────────────────────── */
+    .cs-img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+
+    /* ── IMAGE TRIO ─────────────────────────── */
+    .cs-img-trio { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 24px; }
+    .cs-img-trio > div { position: relative; overflow: hidden; border-radius: 12px; }
+    .cs-img-trio img { display: block; width: 100%; height: auto; }
+
+    /* ── IMPACT PILLS ──────────────────────── */
+    .cs-impact { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+    .cs-impact-pill {
+      display: inline-block; align-self: flex-start;
+      padding: 8px 18px;
+      background: #EFEAF6; border-radius: 100px;
+      font-size: 13.5px; color: var(--soft); line-height: 1.4;
+    }
+    .cs-impact-pill--wrapped { border-radius: 12px; }
+
+    /* ── SCROLL ANIMATIONS ──────────────────────── */
+    .cs-scroll {
+      opacity: 0;
+      transform: translateY(7px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .cs-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ─────────────────────────── */
+    @media (max-width: 640px)  { :root { --page-pad: 20px; } }
+
+    @media (max-width: 960px) {
+      .cs-intro-row { grid-template-columns: 1fr; gap: 36px; }
+      .cs-meta-col { flex-direction: row; flex-wrap: wrap; gap: 24px 40px; }
+    }
+    @media (max-width: 700px) {
+      .cs-title        { font-size: 32px; }
+      .cs-h2           { font-size: 28px; }
+      .cs-intro-lead   { font-size: 18px; }
+      .cs-img-pair     { grid-template-columns: 1fr; }
+      .cs-img-trio     { grid-template-columns: 1fr; }
+    }
+
+    /* ── BACK TO TOP ────────────────────────── */
+    .btt-btn {
+      position: fixed; bottom: 32px; right: 32px;
+      width: 66px; height: 66px; border-radius: 50%;
+      background: #fff; border: 1px solid var(--divider);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; opacity: 0; transform: translateY(8px);
+      transition: opacity 0.25s ease, transform 0.25s ease, background 0.15s ease, bottom 0.15s ease;
+      z-index: 100;
+    }
+    .btt-btn.visible { opacity: 1; transform: translateY(0); }
+    .btt-btn:hover { background: #F5F4F1; }
+
+    /* ── PORTFOLIO HEADER / FOOTER ─── */
+    .pf-header { background: #f6f7f2; padding-top: 32px; }
+    .pf-header-inner {
+      margin-left: 64px; margin-right: 64px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding-bottom: 32px;
+      border-bottom: 1px dashed #d0d0c8;
+    }
+    .pf-site-name {
+      font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 400;
+      letter-spacing: 0.01em; text-transform: uppercase; color: #777777;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+    }
+    .pf-header-right { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .pf-resume-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 400;
+      letter-spacing: 0.01em; text-transform: uppercase;
+      background: #e8e8e4; border-radius: 9999px; padding: 2px 6px;
+      color: #777777; text-decoration: none;
+      transition: background 0.18s ease;
+    }
+    .pf-resume-btn:hover { background: #deded9; }
+    .pf-email-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 400;
+      letter-spacing: 0.01em; text-transform: uppercase;
+      color: #777777; text-decoration: none; transition: transform 0.18s ease;
+    }
+    .pf-email-link:hover { transform: translateX(4px); }
+    .pf-footer { background: #f6f7f2; padding-bottom: 32px; }
+    .pf-footer-inner {
+      margin-left: 64px; margin-right: 64px;
+      border-top: 1px dashed #d0d0c8; padding-top: 32px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .pf-social-links { display: flex; align-items: center; gap: 8px; }
+    .pf-icon-link {
+      display: inline-flex; align-items: center; justify-content: center;
+      color: #777777; text-decoration: none; transition: color 0.18s ease;
+    }
+    .pf-icon-link:hover { color: #1a1a1a; }
+    .pf-all-work {
+      font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 400;
+      letter-spacing: 0.01em; text-transform: uppercase;
+      color: #777777; text-decoration: none; transition: color 0.18s ease;
+    }
+    .pf-all-work:hover { color: #1a1a1a; }
+    @media (max-width: 640px) {
+      .pf-header-inner, .pf-footer-inner { margin-left: 20px; margin-right: 20px; }
+    }
+
+    /* ── CUSTOM CURSOR ──────────────────────── */
+    ::selection { background: rgba(255, 218, 71, 0.3); color: inherit; }
+    * { cursor: none !important; }
+    #cursor {
+      position: fixed;
+      top: 0; left: 0;
+      width: 20px; height: 20px;
+      background: #FFDA47;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      opacity: 0.8;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border 0.2s ease, opacity 0.2s ease;
+    }
+    #cursor.cursor--hover {
+      width: 30px; height: 30px;
+      background: rgba(255, 218, 71, 0.5);
+      border: 1px solid #FFDA47;
+      opacity: 1;
+    }
+  
+    /* ── CASE NAVIGATION ───────────────────── */
+    .pf-case-nav { padding: 0 64px 48px; }
+    .pf-case-nav-inner { border-top: 1px dashed #d0d0c8; padding-top: 48px; }
+    .pf-case-nav-inner {
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 32px;
+    }
+    .pf-case-nav-link {
+      display: flex; flex-direction: column; gap: 6px;
+      text-decoration: none; color: inherit; max-width: 44%;
+      transition: opacity 0.2s ease;
+    }
+    .pf-case-nav-link:hover { opacity: 0.5; }
+    .pf-case-nav-link--next { text-align: right; margin-left: auto; }
+    .pf-case-nav-dir {
+      font-family: 'DM Mono', monospace; font-size: 12px;
+      letter-spacing: 0.05em; text-transform: uppercase; color: #9B9690;
+    }
+    .pf-case-nav-title {
+      font-size: 18px; font-weight: 400;
+      letter-spacing: -0.02em; line-height: 1.2; color: #1A1A1A;
+    }
+    .pf-case-nav-type {
+      font-family: 'DM Mono', monospace; font-size: 11px;
+      letter-spacing: 0.06em; text-transform: uppercase; color: #9B9690;
+    }
+    @media (max-width: 640px) {
+      .pf-case-nav { padding: 0 20px 32px; }
+      .pf-case-nav-link { max-width: 48%; }
+      .pf-case-nav-title { font-size: 15px; }
+    }
+  
+    /* ── PAGE ENTER ANIMATIONS ──────────────── */
+    @keyframes pf-home-in {
+      from { opacity: 0; transform: translateX(-10px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes pf-right-in {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes pf-content-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .pf-site-name    { animation: pf-home-in    0.38s ease-out 0.06s both; }
+    .pf-email-link    { animation: pf-right-in   0.32s ease-out 0.12s both; }
+    .cs-outer        { animation: pf-content-in 0.50s ease-out 0.08s both; }
+  </style>
+</head>
+<body>
+
+  <header class="pf-header">
+    <div class="pf-header-inner">
+      <a href="index.html" class="pf-site-name">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12 6.5H1.5M6 3.5L1.5 6.5 6 9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        HOME
+      </a>
+      <div class="pf-header-right">
+        <a href="mailto:kellyhengjl@gmail.com" class="pf-email-link" aria-label="Email Kelly Heng">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="0.75" y="2.25" width="11.5" height="8.5" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M0.75 4L6.5 7.5 12.25 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          KELLYHENGJL@GMAIL.COM
+        </a>
+        <a href="images/resume.pdf" class="pf-resume-btn" download aria-label="Download resume">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M6.5 1v7.5M3.5 6.5l3 2.5 3-2.5M1.5 11.5h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          RESUME
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="cs-outer">
+
+      <!-- Hero -->
+      <div class="cs-hero">
+        <img src="images/me3-hero.jpg" alt="ME3 Crypto Wallet" />
+      </div>
+
+      <h1 class="cs-title">Wallet UX for Mainstream Adoption</h1>
+
+      <!-- Intro row -->
+      <div class="cs-intro-row">
+        <div class="cs-intro-body">
+          <span class="section-label">Context</span>
+          <p class="cs-intro-lead">GameFi was transforming gaming across Southeast Asia — but the complexity of Web3 kept most users locked out.</p>
+          <p class="cs-body">Despite the growing popularity of Play-to-Earn crypto gaming, the user journey was fragmented and overly complex. In mid-2022, I joined Me3 as a UIUX designer tasked with solving problem statements identified through their user research. The team had already reached the ideation phase, and I was brought on to help bring their ideas to life.</p>
+        </div>
+        <div class="cs-meta-col">
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">My Role</span>
+            <span class="cs-meta-value">UIUX Designer</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Team</span>
+            <span class="cs-meta-value">1 PM, 1 Mobile Dev, 1 Backend Dev</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Timeline</span>
+            <span class="cs-meta-value">2022 – 2023</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Research -->
+      <div class="cs-section">
+        <span class="section-label">Research</span>
+        <h2 class="cs-h2">A fragmented journey with too many barriers</h2>
+        <p class="cs-body">The goal was to remove the complexities of Web3 for Web2 users. Through market research, we found that the user journey was fragmented and overly complex — creating significant friction and frustration.</p>
+        <p class="cs-body">We identified three pre-requisites for users to start playing Web3 games: a non-custodial wallet with dApp support, funding with tokens, and purchasing NFTs. The most common starting point for Indonesian users was MetaMask, but on-ramping — purchasing crypto with fiat — required creating an account on a centralised platform and completing KYC requirements. Many users resorted to requesting tokens from peers instead.</p>
+        <div class="cs-mockup">
+          <img src="images/me3-user-journey.jpg" alt="User journey map showing fragmentation" />
+          <p class="cs-caption">Fragmented user journey across multiple platforms</p>
+        </div>
+      </div>
+
+      <hr class="cs-rule">
+
+      <!-- Defining -->
+      <div class="cs-section">
+        <span class="section-label">Defining</span>
+        <h2 class="cs-h2">Turning complexity into clear problem statements</h2>
+        <p class="cs-body">Having mapped the user journey, we identified key needs and opportunities for innovation, and developed problem statements to guide our design process.</p>
+        <div class="cs-hmw">
+          <p class="cs-hmw-quote">"How might we simplify the onboarding process and make it more seamless for users?"</p>
+          <p class="cs-hmw-quote">"How might we reduce fragmentation in the Web3 space and improve user experience?"</p>
+          <p class="cs-hmw-quote">"How might we make everything simpler and more accessible for users?"</p>
+        </div>
+      </div>
+
+      <hr class="cs-rule">
+
+      <!-- Ideating & Prototyping -->
+      <div class="cs-section">
+        <span class="section-label">Ideating &amp; Prototyping</span>
+        <h2 class="cs-h2">One app to replace three fragmented tools</h2>
+        <p class="cs-body">During the ideation phase, I collaborated with the team to develop user flows, wireframes, and low-fidelity designs. Three key concepts emerged:</p>
+        <ul class="cs-sublist" style="margin-top:16px">
+          <li>A mobile application with a <strong>game-centred dashboard</strong> — allowing users to fulfil all three needs in a single platform</li>
+          <li>Wallet creation via <strong>Google SSO</strong> — eliminating the need for seed phrases entirely</li>
+          <li><strong>In-app tutorials</strong> for each game to help new users get started without independent research</li>
+        </ul>
+        <div class="cs-mockup">
+          <img src="images/me3-prototypes.jpg" alt="Early prototypes" />
+          <p class="cs-caption">High-fidelity prototypes</p>
+        </div>
+      </div>
+
+      <hr class="cs-rule">
+
+      <!-- Testing -->
+      <div class="cs-section">
+        <span class="section-label">Testing</span>
+        <h2 class="cs-h2">Validating with users, iterating on feedback</h2>
+        <p class="cs-body">During usability testing, we asked users to perform specific tasks — creating a wallet, funding it with tokens, and attempting game tutorials. Overall feedback was positive: users found the app easy to navigate and the wallet creation process simplified. However, we also identified areas for improvement, including clearer onboarding instructions and a more intuitive user flow.</p>
+        <p class="cs-body">We made iterative changes and continued testing until the design addressed most user pain points.</p>
+        <div class="cs-img-trio">
+          <div>
+            <img src="images/me3-user-research.jpg" alt="UX Research Plan" />
+            <p class="cs-caption">UX Research Plan</p>
+          </div>
+          <div>
+            <img src="images/me3-research-methods.jpg" alt="Research Approach" />
+            <p class="cs-caption">Research Approach</p>
+          </div>
+          <div>
+            <img src="images/me3-synthesis.jpg" alt="Synthesising User Interview Results" />
+            <p class="cs-caption">Synthesising Interviews</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="cs-rule">
+
+      <!-- Insights -->
+      <div class="cs-section">
+        <div class="solution-row">
+          <div class="solution-text">
+            <span class="section-label">Insights</span>
+            <h2 class="cs-h2">Users expected their wallet first, not the games</h2>
+            <p class="cs-body">A key insight from user interviews was that users expected to see their wallet balance first, not a game-centred dashboard. This led us to restructure the onboarding flow — removing game selection at the start and surfacing wallet balances and a deposit button on the home screen.</p>
+            <p class="cs-body">We also found that users wanted more flexibility in the tutorial portion of each game, so we removed the progression bar and split the tutorial screens into shorter, optional steps.</p>
+          </div>
+          <div class="solution-media">
+            <div class="cs-mockup">
+              <img src="images/me3-conclusions.jpg" alt="Iterated design conclusions" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="cs-rule">
+
+      <!-- Solutions -->
+      <div class="cs-section">
+
+        <!-- 1: text left, gif right -->
+        <div class="solution-item">
+          <div class="solution-row">
+            <div class="solution-text">
+              <span class="section-label">Solution Highlight 1</span>
+              <h2 class="cs-h2">Fuss-free onboarding</h2>
+              <p class="cs-body">We eliminated seed phrases entirely, replacing wallet creation with a single Google SSO login. A short educational piece explains how to secure wallet keys — without overwhelming new users upfront.</p>
+              <p class="cs-body">Users can choose to deposit or purchase crypto later in the app, removing all friction from the initial experience.</p>
+              <div class="cs-impact">
+                <span class="cs-impact-pill">Wallet creation reduced to a single step, eliminating the need for seed phrases or account setup.</span>
+              </div>
+            </div>
+            <div class="solution-media">
+              <div class="cs-mockup">
+                <img src="images/me3-prototype-1.gif" alt="Onboarding flow" />
+                <p class="cs-caption">Onboarding — Google SSO wallet creation</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2: gif left, text right -->
+        <div class="solution-item">
+          <div class="solution-row solution-row--reverse">
+            <div class="solution-text">
+              <span class="section-label">Solution Highlight 2</span>
+              <h2 class="cs-h2">Web3 games, all in one place</h2>
+              <p class="cs-body">From the home screen, users can check their wallet and favourite games, and discover new ones through the Games tab. When ready to play, users can purchase or swap for the relevant game tokens without switching to another platform.</p>
+              <p class="cs-body">We also designed for direct fiat-to-game-token purchases, removing the need for multiple swaps across platforms.</p>
+              <div class="cs-impact">
+                <span class="cs-impact-pill">Consolidated the three-step Web3 game setup into a single in-app flow.</span>
+              </div>
+            </div>
+            <div class="solution-media">
+              <div class="cs-mockup">
+                <img src="images/me3-prototype-2.gif" alt="Web3 game selection flow" />
+                <p class="cs-caption">Home screen — wallet balance and game discovery</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3: text left, gif right -->
+        <div class="solution-item">
+          <div class="solution-row">
+            <div class="solution-text">
+              <span class="section-label">Solution Highlight 3</span>
+              <h2 class="cs-h2">Multi-chain wallet management</h2>
+              <p class="cs-body">Users playing multiple Web3 games across different chains often struggle with holding separate wallets for each. We designed a multi-chain wallet that lets users manage multiple chains — and multiple wallets — within a single app.</p>
+              <p class="cs-body">Users can easily control which chains are visible within each wallet, keeping their portfolio organised as they expand into new games.</p>
+              <div class="cs-impact">
+                <span class="cs-impact-pill">Replaced the need for multiple separate wallets with a single unified multi-chain interface.</span>
+              </div>
+            </div>
+            <div class="solution-media">
+              <div class="cs-mockup">
+                <img src="images/me3-prototype-3.gif" alt="Multi-chain wallet management" />
+                <p class="cs-caption">Multi-chain wallet — chain and balance management</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /solutions -->
+
+      <hr class="cs-rule">
+
+      <!-- Retrospect -->
+      <div class="cs-section">
+        <span class="section-label">Retrospect</span>
+        <h2 class="cs-h2">Designing for a space still defining itself</h2>
+        <p class="cs-body">Designing in the crypto space posed unique challenges — the inherent complexities and nuances of blockchain products meant there were few established UX patterns to lean on. The project presented a clear opportunity to improve UX in the Web3 ecosystem by translating familiar patterns from Web2 into a new context.</p>
+        <p class="cs-body">I appreciated the opportunity to conduct primary user research on a geographically distant market. Beyond validating design decisions, the research gave me a strong foundation for advocating on behalf of users throughout the process.</p>
+        <p class="cs-body">Throughout the project, I applied principles from Lean UX — writing hypotheses based on business assumptions and validating them through research. While there is always room for refinement, I was able to leverage existing wallet design patterns to create a usable, accessible experience.</p>
+        <p class="cs-body">After handing over designs for development, I was also involved in the product management process — a close collaboration with the development team that gave me transferable skills well beyond UI/UX design.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- CASE NAVIGATION -->
+  <nav class="pf-case-nav">
+    <div class="pf-case-nav-inner">
+      <a href="booking-case-study.html" class="pf-case-nav-link pf-case-nav-link--prev">
+      <span class="pf-case-nav-dir">← Previous</span>
+      <span class="pf-case-nav-title">Booking &amp; Accounting System</span>
+      <span class="pf-case-nav-type">DESKTOP</span>
+    </a>
+    </div>
+  </nav>
+  <footer class="pf-footer">
+    <div class="pf-footer-inner">
+      <nav class="pf-social-links">
+        <a href="https://www.linkedin.com/in/kellyhengjl/" aria-label="LinkedIn" class="pf-icon-link" target="_blank" rel="noopener noreferrer">
+          <img src="images/icon-linkedin.png" alt="LinkedIn" width="22" height="22" onerror="this.style.opacity='0'">
+        </a>
+        <a href="https://www.instagram.com/blueuhour/" aria-label="Instagram" class="pf-icon-link" target="_blank" rel="noopener noreferrer">
+          <img src="images/icon-instagram.png" alt="Instagram" width="22" height="22" onerror="this.style.opacity='0'">
+        </a>
+      </nav>
+      <a href="https://behance.net/kellyheng" class="pf-resume-btn" target="_blank" rel="noopener noreferrer" aria-label="More work on Behance">
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        MORE WORK
+      </a>
+    </div>
+  </footer>
+
+  <button class="btt-btn" id="bttBtn" aria-label="Back to top">
+    <svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12V4M4 8l4-4 4 4"/></svg>
+  </button>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.body.style.transition = 'none';
+    document.body.style.opacity = '1';
+    var animObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          animObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.cs-intro-row, .cs-section').forEach(function(el) {
+      el.classList.add('cs-scroll');
+      animObserver.observe(el);
+    });
+    function checkPillWrap() {
+      document.querySelectorAll('.cs-impact-pill').forEach(function(pill) {
+        var singleLineHeight = parseFloat(getComputedStyle(pill).lineHeight) + 16;
+        pill.classList.toggle('cs-impact-pill--wrapped', pill.offsetHeight > singleLineHeight);
+      });
+    }
+    checkPillWrap();
+    window.addEventListener('resize', checkPillWrap);
+  });
+  document.querySelectorAll('a[href]').forEach(function (link) {
+    var href = link.getAttribute('href');
+    if (
+      href &&
+      !href.startsWith('#') &&
+      !href.startsWith('mailto:') &&
+      !href.startsWith('http') &&
+      link.target !== '_blank'
+    ) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.body.style.opacity = '0';
+        setTimeout(function () { window.location.href = href; }, 300);
+      });
+    }
+  });
+  var bttBtn = document.getElementById('bttBtn');
+  function updateBtt() {
+    bttBtn.classList.toggle('visible', window.scrollY > 300);
+    var sentinel = document.querySelector('.pf-case-nav') || document.querySelector('.pf-footer');
+    var sentinelRect = sentinel.getBoundingClientRect();
+    if (sentinelRect.top < window.innerHeight) {
+      bttBtn.style.bottom = (window.innerHeight - sentinelRect.top + 16) + 'px';
+    } else {
+      bttBtn.style.bottom = '';
+    }
+  }
+  window.addEventListener('scroll', updateBtt);
+  updateBtt();
+  bttBtn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  </script>
+
+  <script>
+  (function () {
+    var cur = document.createElement('div');
+    cur.id = 'cursor';
+    document.body.appendChild(cur);
+    document.addEventListener('mousemove', function (e) {
+      cur.style.left = e.clientX + 'px';
+      cur.style.top  = e.clientY + 'px';
+    });
+    var sel = 'a, button, [role="button"], input, select, textarea, label, [tabindex]';
+    document.addEventListener('mouseover', function (e) {
+      if (e.target.closest(sel)) cur.classList.add('cursor--hover');
+    });
+    document.addEventListener('mouseout', function (e) {
+      if (e.target.closest(sel)) cur.classList.remove('cursor--hover');
+    });
+    document.documentElement.addEventListener('mouseleave', function () { cur.style.opacity = '0'; });
+    document.documentElement.addEventListener('mouseenter', function () { cur.style.opacity = ''; });
+  })();
+  </script>
+
+</body>
+</html>
