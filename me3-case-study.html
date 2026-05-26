@@ -177,7 +177,23 @@
     }
 
     /* ── RESPONSIVE ─────────────────────────── */
-    @media (max-width: 640px)  { :root { --page-pad: 20px; } }
+    @media (max-width: 640px) {
+      :root { --page-pad: 20px; }
+
+      /* Tighten vertical rhythm */
+      .cs-section     { margin-bottom: 44px; }
+      .cs-rule        { margin-bottom: 44px; }
+      .solution-item  { margin-bottom: 32px; }
+      .solution-row   { gap: 20px; }
+
+      /* Collapse flex-basis so items only take content height when stacked */
+      .solution-text,
+      .solution-media                         { flex: none; width: 100%; }
+
+      /* Images fill full width when text + media stack vertically */
+      .solution-media .cs-mockup              { max-height: none; }
+      .solution-media .cs-mockup img          { width: 100%; height: auto; max-height: none; }
+    }
 
     @media (max-width: 960px) {
       .cs-intro-row { grid-template-columns: 1fr; gap: 36px; }
@@ -197,7 +213,7 @@
       width: 66px; height: 66px; border-radius: 50%;
       background: #fff; border: 1px solid var(--divider);
       display: flex; align-items: center; justify-content: center;
-      cursor: pointer; opacity: 0; transform: translateY(8px);
+      cursor: pointer; color: #1a1a1a; opacity: 0; transform: translateY(8px);
       transition: opacity 0.25s ease, transform 0.25s ease, background 0.15s ease, bottom 0.15s ease;
       z-index: 100;
     }
@@ -217,7 +233,8 @@
       letter-spacing: 0.01em; text-transform: uppercase; color: #777777;
       text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
     }
-    .pf-header-right { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .pf-header-right { display: flex; align-items: center; gap: 20px; flex-wrap: nowrap; }
+    .pf-email-short { display: none; }
     .pf-resume-btn {
       display: inline-flex; align-items: center; gap: 6px;
       font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 400;
@@ -254,11 +271,13 @@
     .pf-all-work:hover { color: #1a1a1a; }
     @media (max-width: 640px) {
       .pf-header-inner, .pf-footer-inner { margin-left: 20px; margin-right: 20px; }
+      .pf-email-full { display: none; }
+      .pf-email-short { display: inline; }
     }
 
     /* ── CUSTOM CURSOR ──────────────────────── */
     ::selection { background: rgba(255, 218, 71, 0.3); color: inherit; }
-    * { cursor: none !important; }
+    @media (hover: hover) and (pointer: fine) { * { cursor: none !important; } }
     #cursor {
       position: fixed;
       top: 0; left: 0;
@@ -268,7 +287,7 @@
       pointer-events: none;
       z-index: 99999;
       opacity: 0.8;
-      transform: translate(-50%, -50%);
+      will-change: transform;
       transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border 0.2s ease, opacity 0.2s ease;
     }
     #cursor.cursor--hover {
@@ -343,7 +362,7 @@
             <rect x="0.75" y="2.25" width="11.5" height="8.5" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
             <path d="M0.75 4L6.5 7.5 12.25 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
           </svg>
-          KELLYHENGJL@GMAIL.COM
+          <span class="pf-email-full">KELLYHENGJL@GMAIL.COM</span><span class="pf-email-short">EMAIL</span>
         </a>
         <a href="images/resume.pdf" class="pf-resume-btn" download aria-label="Download resume">
           <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -395,7 +414,7 @@
         <p class="cs-body">The goal was to remove the complexities of Web3 for Web2 users. Through market research, we found that the user journey was fragmented and overly complex — creating significant friction and frustration.</p>
         <p class="cs-body">We identified three pre-requisites for users to start playing Web3 games: a non-custodial wallet with dApp support, funding with tokens, and purchasing NFTs. The most common starting point for Indonesian users was MetaMask, but on-ramping — purchasing crypto with fiat — required creating an account on a centralised platform and completing KYC requirements. Many users resorted to requesting tokens from peers instead.</p>
         <div class="cs-mockup">
-          <img src="images/me3-user-journey.webp" alt="User journey map showing fragmentation" />
+          <img loading="lazy" decoding="async" src="images/me3-user-journey.webp" alt="User journey map showing fragmentation" />
           <p class="cs-caption">Fragmented user journey across multiple platforms</p>
         </div>
       </div>
@@ -427,7 +446,7 @@
           <li><strong>In-app tutorials</strong> for each game to help new users get started without independent research</li>
         </ul>
         <div class="cs-mockup">
-          <img src="images/me3-prototypes.webp" alt="Early prototypes" />
+          <img loading="lazy" decoding="async" src="images/me3-prototypes.webp" alt="Early prototypes" />
           <p class="cs-caption">High-fidelity prototypes</p>
         </div>
       </div>
@@ -442,15 +461,15 @@
         <p class="cs-body">We made iterative changes and continued testing until the design addressed most user pain points.</p>
         <div class="cs-img-trio">
           <div>
-            <img src="images/me3-user-research.webp" alt="UX Research Plan" />
+            <img loading="lazy" decoding="async" src="images/me3-user-research.webp" alt="UX Research Plan" />
             <p class="cs-caption">UX Research Plan</p>
           </div>
           <div>
-            <img src="images/me3-research-methods.webp" alt="Research Approach" />
+            <img loading="lazy" decoding="async" src="images/me3-research-methods.webp" alt="Research Approach" />
             <p class="cs-caption">Research Approach</p>
           </div>
           <div>
-            <img src="images/me3-synthesis.webp" alt="Synthesising User Interview Results" />
+            <img loading="lazy" decoding="async" src="images/me3-synthesis.webp" alt="Synthesising User Interview Results" />
             <p class="cs-caption">Synthesising Interviews</p>
           </div>
         </div>
@@ -469,7 +488,7 @@
           </div>
           <div class="solution-media">
             <div class="cs-mockup">
-              <img src="images/me3-conclusions.webp" alt="Iterated design conclusions" />
+              <img loading="lazy" decoding="async" src="images/me3-conclusions.webp" alt="Iterated design conclusions" />
             </div>
           </div>
         </div>
@@ -494,7 +513,7 @@
             </div>
             <div class="solution-media">
               <div class="cs-mockup">
-                <img src="images/me3-prototype-1.gif" alt="Onboarding flow" />
+                <img loading="lazy" decoding="async" src="images/me3-prototype-1.gif" alt="Onboarding flow" />
                 <p class="cs-caption">Onboarding — Google SSO wallet creation</p>
               </div>
             </div>
@@ -515,7 +534,7 @@
             </div>
             <div class="solution-media">
               <div class="cs-mockup">
-                <img src="images/me3-prototype-2.gif" alt="Web3 game selection flow" />
+                <img loading="lazy" decoding="async" src="images/me3-prototype-2.gif" alt="Web3 game selection flow" />
                 <p class="cs-caption">Home screen — wallet balance and game discovery</p>
               </div>
             </div>
@@ -536,7 +555,7 @@
             </div>
             <div class="solution-media">
               <div class="cs-mockup">
-                <img src="images/me3-prototype-3.gif" alt="Multi-chain wallet management" />
+                <img loading="lazy" decoding="async" src="images/me3-prototype-3.gif" alt="Multi-chain wallet management" />
                 <p class="cs-caption">Multi-chain wallet — chain and balance management</p>
               </div>
             </div>
@@ -645,7 +664,12 @@
       bttBtn.style.bottom = '';
     }
   }
-  window.addEventListener('scroll', updateBtt);
+  var _bttRaf = false;
+  window.addEventListener('scroll', function () {
+    if (_bttRaf) return;
+    _bttRaf = true;
+    requestAnimationFrame(function () { _bttRaf = false; updateBtt(); });
+  }, { passive: true });
   updateBtt();
   bttBtn.addEventListener('click', function () {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -654,12 +678,15 @@
 
   <script>
   (function () {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     var cur = document.createElement('div');
     cur.id = 'cursor';
+    cur.style.opacity = '0';
     document.body.appendChild(cur);
+    var cursorReady = false;
     document.addEventListener('mousemove', function (e) {
-      cur.style.left = e.clientX + 'px';
-      cur.style.top  = e.clientY + 'px';
+      cur.style.transform = 'translate(' + e.clientX + 'px, ' + e.clientY + 'px) translate(-50%, -50%)';
+      if (!cursorReady) { cursorReady = true; cur.style.opacity = ''; }
     });
     var sel = 'a, button, [role="button"], input, select, textarea, label, [tabindex]';
     document.addEventListener('mouseover', function (e) {
@@ -671,6 +698,15 @@
     document.documentElement.addEventListener('mouseleave', function () { cur.style.opacity = '0'; });
     document.documentElement.addEventListener('mouseenter', function () { cur.style.opacity = ''; });
   })();
+  </script>
+
+  <!-- BFCACHE RESET: restores page if user navigates back -->
+  <script>
+  window.addEventListener('pageshow', function (e) {
+    if (!e.persisted) return;
+    document.body.style.transition = 'none';
+    document.body.style.opacity = '1';
+  });
   </script>
 
 </body>

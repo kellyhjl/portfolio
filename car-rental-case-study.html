@@ -293,7 +293,7 @@
       width: 66px; height: 66px; border-radius: 50%;
       background: #fff; border: 1px solid var(--divider);
       display: flex; align-items: center; justify-content: center;
-      cursor: pointer; opacity: 0; transform: translateY(8px);
+      cursor: pointer; color: #1a1a1a; opacity: 0; transform: translateY(8px);
       transition: opacity 0.25s ease, transform 0.25s ease, background 0.15s ease, bottom 0.15s ease;
       z-index: 100;
     }
@@ -313,7 +313,8 @@
       letter-spacing: 0.01em; text-transform: uppercase; color: #777777;
       text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
     }
-    .pf-header-right { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .pf-header-right { display: flex; align-items: center; gap: 20px; flex-wrap: nowrap; }
+    .pf-email-short { display: none; }
     .pf-resume-btn {
       display: inline-flex; align-items: center; gap: 6px;
       font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 400;
@@ -350,11 +351,13 @@
     .pf-all-work:hover { color: #1a1a1a; }
     @media (max-width: 640px) {
       .pf-header-inner, .pf-footer-inner { margin-left: 20px; margin-right: 20px; }
+      .pf-email-full { display: none; }
+      .pf-email-short { display: inline; }
     }
 
     /* ── CUSTOM CURSOR ──────────────────────── */
     ::selection { background: rgba(255, 218, 71, 0.3); color: inherit; }
-    * { cursor: none !important; }
+    @media (hover: hover) and (pointer: fine) { * { cursor: none !important; } }
     #cursor {
       position: fixed;
       top: 0; left: 0;
@@ -364,7 +367,7 @@
       pointer-events: none;
       z-index: 99999;
       opacity: 0.8;
-      transform: translate(-50%, -50%);
+      will-change: transform;
       transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border 0.2s ease, opacity 0.2s ease;
     }
     #cursor.cursor--hover {
@@ -439,7 +442,7 @@
             <rect x="0.75" y="2.25" width="11.5" height="8.5" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
             <path d="M0.75 4L6.5 7.5 12.25 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
           </svg>
-          KELLYHENGJL@GMAIL.COM
+          <span class="pf-email-full">KELLYHENGJL@GMAIL.COM</span><span class="pf-email-short">EMAIL</span>
         </a>
         <a href="images/resume.pdf" class="pf-resume-btn" download aria-label="Download resume">
           <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -534,7 +537,7 @@
         </div>
 
         <div class="cs-mockup">
-          <img src="images/car-research-2.webp" alt="Journey Map of a Car Lite Customer" />
+          <img loading="lazy" decoding="async" src="images/car-research-2.webp" alt="Journey Map of a Car Lite Customer" />
         </div>
 
         <div class="cs-theme-grid cs-theme-grid-3" style="margin-top:20px; align-items:stretch;">
@@ -594,17 +597,17 @@
 
           <div class="cs-img-pair">
             <div>
-              <img src="images/car-sol1a.webp" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
+              <img loading="lazy" decoding="async" src="images/car-sol1a.webp" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
               <p class="cs-caption">Vehicle Search on Web (Before)</p>
             </div>
             <div>
-              <img src="images/car-sol1b.webp" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
+              <img loading="lazy" decoding="async" src="images/car-sol1b.webp" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
               <p class="cs-caption">Prototyping</p>
             </div>
           </div>
 
           <div class="cs-mockup">
-            <img src="images/car-sol1.webp" alt="Vehicle discovery map view" />
+            <img loading="lazy" decoding="async" src="images/car-sol1.webp" alt="Vehicle discovery map view" />
             <p class="cs-caption">Vehicle search on App (After)</p>
           </div>
           <div class="cs-impact">
@@ -625,16 +628,16 @@
 
           <div class="cs-img-pair">
             <div>
-              <img src="images/car-sol2-pre-a.webp" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
+              <img loading="lazy" decoding="async" src="images/car-sol2-pre-a.webp" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
               <p class="cs-caption">Start Trip for Website (Before)</p>
             </div>
             <div>
-              <img src="images/car-sol2-pre-b.webp" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
+              <img loading="lazy" decoding="async" src="images/car-sol2-pre-b.webp" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
               <p class="cs-caption">Drafts</p>
             </div>
           </div>
           <div class="cs-mockup" style="margin-top:12px">
-            <img src="images/car-sol2.webp" alt="Streamlined start and end trip flow" />
+            <img loading="lazy" decoding="async" src="images/car-sol2.webp" alt="Streamlined start and end trip flow" />
             <p class="cs-caption">Refined Start and End Trip screens</p>
           </div>
           <div class="cs-compare">
@@ -662,7 +665,7 @@
           </ul>
 
           <div class="cs-mockup">
-            <img src="images/car-sol3.webp" alt="State-driven UI and visual hierarchy" />
+            <img loading="lazy" decoding="async" src="images/car-sol3.webp" alt="State-driven UI and visual hierarchy" />
             <p class="cs-caption">App UI (After)</p>
           </div>
           <div class="cs-impact">
@@ -695,16 +698,16 @@
 
         <div class="cs-img-pair" style="margin-top:24px;">
           <div>
-            <img src="images/car-result1.webp" alt="Car Lite app results" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
+            <img loading="lazy" decoding="async" src="images/car-result1.webp" alt="Car Lite app results" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
             <p class="cs-caption">QA test cases</p>
           </div>
           <div>
-            <img src="images/car-result2.webp" alt="Car Lite app results" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
+            <img loading="lazy" decoding="async" src="images/car-result2.webp" alt="Car Lite app results" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
             <p class="cs-caption">Positive app reviews</p>
           </div>
         </div>
         <div class="cs-mockup" style="margin-top:12px;">
-          <img src="images/car-result3.webp" alt="Other completed features" />
+          <img loading="lazy" decoding="async" src="images/car-result3.webp" alt="Other completed features" />
           <p class="cs-caption">Other completed features</p>
         </div>
       </div>
@@ -798,7 +801,12 @@
       bttBtn.style.bottom = '';
     }
   }
-  window.addEventListener('scroll', updateBtt);
+  var _bttRaf = false;
+  window.addEventListener('scroll', function () {
+    if (_bttRaf) return;
+    _bttRaf = true;
+    requestAnimationFrame(function () { _bttRaf = false; updateBtt(); });
+  }, { passive: true });
   updateBtt();
   bttBtn.addEventListener('click', function () {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -807,12 +815,15 @@
 
   <script>
   (function () {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     var cur = document.createElement('div');
     cur.id = 'cursor';
+    cur.style.opacity = '0';
     document.body.appendChild(cur);
+    var cursorReady = false;
     document.addEventListener('mousemove', function (e) {
-      cur.style.left = e.clientX + 'px';
-      cur.style.top  = e.clientY + 'px';
+      cur.style.transform = 'translate(' + e.clientX + 'px, ' + e.clientY + 'px) translate(-50%, -50%)';
+      if (!cursorReady) { cursorReady = true; cur.style.opacity = ''; }
     });
     var sel = 'a, button, [role="button"], input, select, textarea, label, [tabindex]';
     document.addEventListener('mouseover', function (e) {
@@ -824,6 +835,15 @@
     document.documentElement.addEventListener('mouseleave', function () { cur.style.opacity = '0'; });
     document.documentElement.addEventListener('mouseenter', function () { cur.style.opacity = ''; });
   })();
+  </script>
+
+  <!-- BFCACHE RESET: restores page if user navigates back -->
+  <script>
+  window.addEventListener('pageshow', function (e) {
+    if (!e.persisted) return;
+    document.body.style.transition = 'none';
+    document.body.style.opacity = '1';
+  });
   </script>
 
 </body>

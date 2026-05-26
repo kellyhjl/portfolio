@@ -19,7 +19,7 @@
           <rect x="0.75" y="2.25" width="11.5" height="8.5" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
           <path d="M0.75 4L6.5 7.5 12.25 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
         </svg>
-        KELLYHENGJL@GMAIL.COM
+        <span class="email-full">KELLYHENGJL@GMAIL.COM</span><span class="email-short">EMAIL</span>
       </a>
 
       <a href="images/resume.pdf" class="resume-btn" download aria-label="Download resume">
@@ -111,7 +111,7 @@
             </ul>
           </div>
 
-          <div class="about-group">
+          <div class="about-group about-group--certs">
             <div class="about-group-icon-col">
               <img src="images/icon-certifications.png" class="about-group-icon" alt="" onerror="this.style.display='none'">
             </div>
@@ -391,17 +391,38 @@
         });
       });
     } else {
-      /* ── Touch / no cursor: tap to show, tap outside to reset ── */
+      /* ── Touch: tap centers + straightens stamp, auto-resets after 3s ── */
+      var autoResetTimer = null;
+
+      function resetStamps() {
+        if (autoResetTimer) { clearTimeout(autoResetTimer); autoResetTimer = null; }
+        stamps.forEach(function (s) {
+          s.classList.remove('is-front');
+          s.style.transform = '';
+        });
+      }
+
       stamps.forEach(function (stamp) {
         stamp.addEventListener('click', function (e) {
-          e.stopPropagation(); /* prevent bubbling to the document reset below */
-          stamps.forEach(function (s) { s.classList.remove('is-front'); });
+          e.stopPropagation();
+          var alreadyFront = stamp.classList.contains('is-front');
+          resetStamps();
+          if (alreadyFront) return; /* second tap collapses it */
+
+          /* Compute how far to shift stamp so it centers within the panel */
+          var panel = stamp.parentElement;
+          var panelRect = panel.getBoundingClientRect();
+          var stampRect = stamp.getBoundingClientRect();
+          var offsetX = (panelRect.left + panelRect.width / 2) - (stampRect.left + stampRect.width / 2);
+
           stamp.classList.add('is-front');
+          stamp.style.transform = 'translateX(' + Math.round(offsetX) + 'px) rotate(0deg) scale(1.3)';
+
+          autoResetTimer = setTimeout(resetStamps, 1500);
         });
       });
-      document.addEventListener('click', function () {
-        stamps.forEach(function (s) { s.classList.remove('is-front'); });
-      });
+
+      document.addEventListener('click', resetStamps);
     }
   })();
   </script>
@@ -439,12 +460,15 @@
 
   <script>
   (function () {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     var cur = document.createElement('div');
     cur.id = 'cursor';
+    cur.style.opacity = '0';
     document.body.appendChild(cur);
+    var cursorReady = false;
     document.addEventListener('mousemove', function (e) {
-      cur.style.left = e.clientX + 'px';
-      cur.style.top  = e.clientY + 'px';
+      cur.style.transform = 'translate(' + e.clientX + 'px, ' + e.clientY + 'px) translate(-50%, -50%)';
+      if (!cursorReady) { cursorReady = true; cur.style.opacity = ''; }
     });
     var sel = 'a, button, [role="button"], input, select, textarea, label, [tabindex], .stamp';
     document.addEventListener('mouseover', function (e) {
@@ -456,6 +480,19 @@
     document.documentElement.addEventListener('mouseleave', function () { cur.style.opacity = '0'; });
     document.documentElement.addEventListener('mouseenter', function () { cur.style.opacity = ''; });
   })();
+  </script>
+
+  <!-- BFCACHE RESET: restores homepage if user navigates back -->
+  <script>
+  window.addEventListener('pageshow', function (e) {
+    if (!e.persisted) return;
+    var mainInner = document.querySelector('.main-inner');
+    if (mainInner) { mainInner.style.transition = ''; mainInner.style.opacity = ''; mainInner.style.transform = ''; }
+    var emailEl = document.querySelector('.email-link');
+    if (emailEl) { emailEl.style.transition = ''; emailEl.style.opacity = ''; emailEl.style.transform = ''; }
+    var resumeEl = document.querySelector('.resume-btn');
+    if (resumeEl) { resumeEl.style.transition = ''; resumeEl.style.opacity = ''; }
+  });
   </script>
 
 </body>
