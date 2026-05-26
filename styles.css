@@ -78,42 +78,11 @@ header {
   border-bottom: 1px dashed var(--divider);
 }
 
-/* Site name (header left) */
-.site-name {
-  font-family: var(--font-dm-mono);
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-/* Social icon links (footer) */
+/* Social links (footer) */
 .social-links {
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-.icon-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--muted);
-  transition: color 0.18s ease;
-}
-
-.icon-link:hover {
-  color: var(--text);
-}
-
-/* Right side: resume + email */
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
 }
 
 /* RESUME button */
@@ -138,8 +107,6 @@ header {
 }
 
 /* Email link */
-.email-short { display: none; }
-
 .email-link {
   display: inline-flex;
   align-items: center;
@@ -193,6 +160,8 @@ main {
   border-radius: 10px;
   object-fit: cover;
   flex-shrink: 0;
+  transform-origin: left center;
+  transition: transform 0.22s ease;
 }
 
 .intro-meta h1 {
@@ -259,6 +228,7 @@ main {
 .pill {
   display: inline-flex;
   align-items: center;
+  gap: 5px;
   border: 1px solid var(--pill-border);
   border-radius: 9999px;
   padding: 0 10px;
@@ -281,61 +251,6 @@ main {
   text-transform: uppercase;
   color: var(--muted);
   margin-bottom: 12px;
-}
-
-/* Cases list */
-.cases-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.case-item-link {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  text-decoration: none;
-  transition: opacity 0.18s ease;
-}
-
-.case-item-link:hover {
-  opacity: 0.7;
-}
-
-.case-thumb {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.case-icon {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-}
-
-.case-item-body {
-  flex: 1;
-  min-width: 0;
-}
-
-.case-item-title {
-  font-family: var(--font-geist);
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 0.8;
-  color: var(--text);
-  margin-bottom: 6px;
-}
-
-.case-item-meta {
-  font-family: var(--font-dm-mono);
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  color: var(--muted);
 }
 
 /* 2×2 work gallery */
@@ -391,8 +306,6 @@ main {
 
 /* Fallback tile colors */
 .tile-pink  { background: #f4aec8; }
-.tile-mint  { background: #7ee8dc; }
-.tile-red   { background: #d63c3c; }
 .tile-dark  { background: #2a2a2a; }
 
 /* Image fills tile; sits above fallback glyph */
@@ -418,17 +331,6 @@ main {
 .tile-glyph--dark  { color: rgba(20, 20, 20, 0.85); }
 .tile-glyph--light { color: rgba(255, 255, 255, 0.92); }
 
-/* Meta caption under each tile */
-.tile-meta {
-  font-family: var(--font-dm-mono);
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 8px;
-}
-
 /* ═══════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════ */
@@ -443,15 +345,6 @@ footer {
   gap: 16px;
   border-top: 1px dashed var(--divider);
   padding-top: 32px;
-}
-
-.copyright {
-  font-family: var(--font-dm-mono);
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
-  color: var(--muted);
 }
 
 .all-cases-link {
@@ -471,11 +364,6 @@ footer {
   opacity: 0.6;
 }
 
-.all-cases-icon {
-  display: inline-flex;
-  align-items: center;
-}
-
 /* ═══════════════════════════════════════
    ABOUT PANEL
 ═══════════════════════════════════════ */
@@ -488,15 +376,21 @@ footer {
   -webkit-tap-highlight-color: transparent;
 }
 
-.avatar,
-.intro-meta h1 {
-  transition: opacity 0.18s ease;
+.avatar {
+  transform-origin: left center;
+  transition: transform 0.22s ease;
+}
+
+.intro-meta {
+  transition: transform 0.22s ease;
 }
 
 @media (hover: hover) {
-  .intro-trigger:hover .avatar,
-  .intro-trigger:hover .intro-meta h1 {
-    opacity: 0.6;
+  .intro-trigger:hover .avatar {
+    transform: scale(1.2);
+  }
+  .intro-trigger:hover .intro-meta {
+    transform: translateX(10px);
   }
 }
 
@@ -639,7 +533,38 @@ footer {
   align-items: center;
   padding: 32px 0 52px;
   overflow: visible;
+  position: relative;
   transition: opacity 0.28s ease;
+}
+
+/* Instagram CTA — floats below the photography stamp */
+.stamp-cta {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-dm-mono);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  background: var(--resume-bg);
+  border-radius: 9999px;
+  padding: 3px 10px;
+  color: var(--muted);
+  text-decoration: none;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 20;
+}
+.stamp-cta.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.stamp-cta:hover {
+  background: #deded9;
 }
 
 /* Overlapping fan: each stamp is positioned relative, shifted left via negative margin */
@@ -743,9 +668,6 @@ footer {
   .header-right {
     gap: 12px;
   }
-
-  .email-full { display: none; }
-  .email-short { display: inline; }
 
   main {
     padding-bottom: 48px;

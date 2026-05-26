@@ -266,7 +266,14 @@
     }
 
     /* ── RESPONSIVE ─────────────────────────── */
-    @media (max-width: 640px)  { :root { --page-pad: 20px; } }
+    @media (max-width: 640px) {
+      :root { --page-pad: 20px; }
+
+      /* Move App Store button below the hero image instead of overlaid */
+      .cs-hero-wrap { display: flex; flex-direction: column; gap: 12px; overflow: visible; }
+      .cs-hero      { margin-bottom: 0; }
+      .cs-hero-btn  { position: static; opacity: 1; transform: none; pointer-events: auto; align-self: flex-start; }
+    }
 
     @media (max-width: 960px) {
       .cs-intro-row { grid-template-columns: 1fr; gap: 36px; }
