@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✏️</text></svg>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kelly Heng — UI/UX Designer</title>
+  <title>Kelly Heng - UI/UX Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -169,7 +169,7 @@
             <img src="images/me3-preview.webp" alt="ME3 Wallet" class="tile-img">
             <span class="tile-glyph tile-glyph--light" aria-hidden="true">✦</span>
           </a>
-          <!-- WORK EXPAND OVERLAY — remove this div + .work-expand CSS + script to revert -->
+          <!-- WORK EXPAND OVERLAY - remove this div + .work-expand CSS + script to revert -->
           <div class="work-expand" aria-hidden="true" tabindex="0">
             <img class="work-expand__img" alt="">
             <p class="work-expand__title"></p>
@@ -209,7 +209,7 @@
     </div>
   </footer>
 
-  <!-- ABOUT PANEL TOGGLE — remove this script block to revert -->
+  <!-- ABOUT PANEL TOGGLE - remove this script block to revert -->
   <script>
   (function () {
     var trigger     = document.getElementById('introTrigger');
@@ -295,7 +295,7 @@
   })();
   </script>
 
-  <!-- GALLERY HOVER EXPAND — remove this script block to revert -->
+  <!-- GALLERY HOVER EXPAND - remove this script block to revert -->
   <script>
   (function () {
     var grid     = document.querySelector('.work-grid');
@@ -312,7 +312,7 @@
         expTitle.textContent = tile.dataset.title || '';
         expand.classList.add('is-active');
       });
-      /* Close the moment cursor leaves a tile — no buffer, gaps count as outside */
+      /* Close the moment cursor leaves a tile - no buffer, gaps count as outside */
       tile.addEventListener('mouseleave', function () {
         expand.classList.remove('is-active');
       });
@@ -417,7 +417,7 @@
         var expand = document.querySelector('.work-expand');
         if (expand) expand.classList.remove('is-active');
 
-        /* Email slides right and fades — mirrors landing position in case study header */
+        /* Email slides right and fades - mirrors landing position in case study header */
         var emailEl = document.querySelector('.email-link');
         emailEl.style.transition = 'transform 0.30s ease-out, opacity 0.28s ease';
         emailEl.style.transform  = 'translateX(52px)';

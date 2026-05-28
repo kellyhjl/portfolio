@@ -125,7 +125,7 @@ header {
 }
 
 /* ═══════════════════════════════════════
-   MAIN — TWO-COLUMN LAYOUT
+   MAIN - TWO-COLUMN LAYOUT
 ═══════════════════════════════════════ */
 main {
   flex: 1;
@@ -425,7 +425,7 @@ footer {
 }
 
 
-/* About panel — left col */
+/* About panel - left col */
 .about-panel {
   display: none;
   opacity: 0;
@@ -524,7 +524,7 @@ footer {
   flex-shrink: 0;
 }
 
-/* Stamps panel — right col */
+/* Stamps panel - right col */
 .stamps-panel {
   display: none;
   opacity: 0;
@@ -537,7 +537,7 @@ footer {
   transition: opacity 0.28s ease;
 }
 
-/* Instagram CTA — floats below the photography stamp */
+/* Instagram CTA - floats below the photography stamp */
 .stamp-cta {
   position: absolute;
   display: inline-flex;
@@ -635,7 +635,7 @@ footer {
 }
 
 /* ═══════════════════════════════════════
-   RESPONSIVE — TABLET (≤1024px)
+   RESPONSIVE - TABLET (≤1024px)
 ═══════════════════════════════════════ */
 @media (max-width: 1024px) {
   .main-inner {
@@ -653,7 +653,7 @@ footer {
 }
 
 /* ═══════════════════════════════════════
-   RESPONSIVE — MOBILE (≤640px)
+   RESPONSIVE - MOBILE (≤640px)
 ═══════════════════════════════════════ */
 @media (max-width: 640px) {
   :root {
