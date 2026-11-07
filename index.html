@@ -444,29 +444,6 @@
   })();
   </script>
 
-  <script>
-  (function () {
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    var cur = document.createElement('div');
-    cur.id = 'cursor';
-    cur.style.opacity = '0';
-    document.body.appendChild(cur);
-    var cursorReady = false;
-    document.addEventListener('mousemove', function (e) {
-      cur.style.transform = 'translate(' + e.clientX + 'px, ' + e.clientY + 'px) translate(-50%, -50%)';
-      if (!cursorReady) { cursorReady = true; cur.style.opacity = ''; }
-    });
-    var sel = 'a, button, [role="button"], input, select, textarea, label, [tabindex], .stamp';
-    document.addEventListener('mouseover', function (e) {
-      if (e.target.closest(sel)) cur.classList.add('cursor--hover');
-    });
-    document.addEventListener('mouseout', function (e) {
-      if (e.target.closest(sel)) cur.classList.remove('cursor--hover');
-    });
-    document.documentElement.addEventListener('mouseleave', function () { cur.style.opacity = '0'; });
-    document.documentElement.addEventListener('mouseenter', function () { cur.style.opacity = ''; });
-  })();
-  </script>
 
   <!-- BFCACHE RESET: restores homepage if user navigates back -->
   <script>
